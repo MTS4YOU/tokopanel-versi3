@@ -14,8 +14,8 @@ export const appConfig = {
   feeMin: 10, //minimal fee
   feeMax: 50, // max fee 
   pay: {
-    api_id: "3c8e1389f124",
-    api_key: "2ee8e987299204903aaf74cf24ddabe6345db043",
+    api_id: "753adf07224e",
+    api_key: "8befc17ac88c9cc72cadca28bc87d71acb735af8",
   },
   emailSender: {
     host: "okfajri45@gmail.com", // Gmail host
