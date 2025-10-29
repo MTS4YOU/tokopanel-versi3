@@ -1,9 +1,9 @@
 export const pterodactylConfig = {
-  domain: process.env.DOMAIN_PANEL,
-  apiKey: process.env.APIKEY_PANEL,
-  nests: process.env.NESTS_PANEL,
+  domain: "https://domain",
+  apiKey: "plta",
+  nests: "5",
   nestsGame: "2", // ga ubah di isi, ga perlu
-  egg: process.env.EGG_PANEL,
+  egg: "15",
   eggSamp: "16", // ga ubah di isi, ga perlu
   location: "1", // location panel 
 }
@@ -13,7 +13,10 @@ export const appConfig = {
   nameHost: "MTS4YOU", // nama host 
   feeMin: 10, //minimal fee
   feeMax: 50, // max fee 
-  apikey: "CiaaTopUp_wrgpl88n6a47bth5", // apikey cia topup 
+  pay: {
+    api_id: "3c8e1389f124",
+    api_key: "2ee8e987299204903aaf74cf24ddabe6345db043",
+  },
   emailSender: {
     host: "okfajri45@gmail.com", // Gmail host
     port: 587, // ga usa di ubah, ga guna 
