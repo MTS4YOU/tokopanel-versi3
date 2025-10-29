@@ -10,7 +10,7 @@ export const pterodactylConfig = {
 
 export const appConfig = {
   whatsappGroupLink: "", // link group
-  nameHost: "MTS4YOU TOKO PANEL", // nama host 
+  nameHost: "MTS4YOU XD", // nama host 
   feeMin: 10, //minimal fee
   feeMax: 50, // max fee 
   pay: {
