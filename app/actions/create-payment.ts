@@ -45,7 +45,7 @@ export async function createPayment(planId: string, username: string, email: str
     // 🔐 Buat signature (md5 dari api_id + api_key)
     const signature = crypto
       .createHash("md5")
-      .update(`${API_ID}${API_KEY}`)
+      .update(`${API_ID}${API_KEY}${transactionId}`)
       .digest("hex")
 
     // 🔹 Siapkan body JSON untuk API Topupku
