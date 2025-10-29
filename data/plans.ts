@@ -5,7 +5,7 @@ export const plans = [
     memory: 1024,
     disk: 1120,
     cpu: 50,
-    price: 2,
+    price: 100,
     description: "Paket hemat untuk keperluan ringan",
     features: ["1GB RAM", "1GB Disk", "50% CPU", "Support 24/7"],
   },
