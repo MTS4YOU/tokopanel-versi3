@@ -61,7 +61,7 @@ export async function checkPaymentStatus(transactionId: string) {
     const status = data.data?.status
 
     // 🔸 Kalau sudah dibayar
-    if (status === "Paid") {
+    if (status === "PAID") {
       await updatePaymentStatus(transactionId, "paid")
 
       const plan = plans.find((p) => p.id === payment.planId)
