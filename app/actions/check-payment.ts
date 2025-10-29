@@ -15,7 +15,7 @@ interface TopupkuResponse {
   msg: string
   data?: {
     reff_id: string
-    status: "Paid" | "Unpaid" | "Gagal"
+    status: string
     total_bayar: string
     kode_pembayaran: string
     trx_id: string
