@@ -36,7 +36,7 @@ export async function checkPaymentStatus(transactionId: string) {
     // 🔹 Buat signature MD5 baru
     const signature = crypto
       .createHash("md5")
-      .update(`${API_ID}${API_KEY}${transactionId}`)
+      .update(`${API_ID}${API_KEY}`)
       .digest("hex")
 
     const bodyData = {
