@@ -87,7 +87,7 @@ export async function createPayment(planId: string, username: string, email: str
       amount: totalDiterima,      // uang yang masuk tanpa fee
       fee: internalFee + apiFee,  // total fee (internal + topupku)
       total: totalBayar,          // total bayar sesuai QR API
-      qrImageUrl: payData.kode_pembayaran || "",
+      qrImageUrl: `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(payData.kode_pembayaran)}`,
       expirationTime: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
       status: "pending",
       createdAt: new Date().toISOString(),
