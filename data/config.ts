@@ -9,8 +9,8 @@ export const pterodactylConfig = {
 }
 
 export const appConfig = {
-  whatsappGroupLink: "", // link group
-  nameHost: "MTS4YOU XD", // nama host 
+  whatsappGroupLink: "https://whatsapp.com/channel/0029VbBHzkt1t90Z4H55f638", // link group
+  nameHost: "MTS4YOU SHOP", // nama host 
   feeMin: 10, //minimal fee
   feeMax: 50, // max fee 
   pay: {
@@ -18,14 +18,14 @@ export const appConfig = {
     api_key: "8befc17ac88c9cc72cadca28bc87d71acb735af8",
   },
   emailSender: {
-    host: "okfajri45@gmail.com", // Gmail host
+    host: "mail.mts4youxd425@gmail.com", // Gmail host
     port: 587, // ga usa di ubah, ga guna 
     secure: false, // false in
     auth: {
-      user: "", // Gmail buat ngirim ke Gmail buyer 
-      pass: "", // sandi aplikasi 
+      user: "mail.mts4youxd425@gmail.com", // Gmail buat ngirim ke Gmail buyer 
+      pass: "joernukccwnrzpww", // sandi aplikasi 
     },
-    from: "Kurir Panel <okfajri45@gmail.com>",
+    from: "Kurir Panel <mail.mts4youxd425@gmail.com>",
   }, // ganti sendiri 
   telegram: {
     botToken: "",
