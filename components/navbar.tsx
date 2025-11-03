@@ -57,12 +57,6 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-8">
           <NavLink href="/" label="Home" scrolled={scrolled} icon={<Home className="w-4 h-4 mr-1" />} />
-          <NavLink
-            href="/transactions"
-            label="Transaksi"
-            scrolled={scrolled}
-            icon={<FileText className="w-4 h-4 mr-1" />}
-          />
           <NavLink href="/history" label="Riwayat" scrolled={scrolled} icon={<History className="w-4 h-4 mr-1" />} />
           <NavLink
             href={appConfig.whatsappGroupLink}
@@ -139,12 +133,6 @@ export default function Navbar() {
             label="Home"
             onClick={() => setIsOpen(false)}
             icon={<Home className="w-4 h-4 mr-2" />}
-          />
-          <MobileNavLink
-            href="/transactions"
-            label="Transaksi"
-            onClick={() => setIsOpen(false)}
-            icon={<FileText className="w-4 h-4 mr-2" />}
           />
           <MobileNavLink
             href="/history"
