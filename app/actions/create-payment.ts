@@ -6,11 +6,9 @@ import { revalidatePath } from "next/cache"
 import clientPromise from "@/lib/mongodb"
 import { appConfig } from "@/data/config"
 import type { ObjectId } from "mongodb"
-import crypto from "crypto"
 
-const API_ID = `${appConfig.pay.api_id}`
-const API_KEY = `${appConfig.pay.api_key}`
-const BANK_CODE = "SP" // bisa kamu ganti ke "DA", "OVO", dll
+const API_KEY = `${appConfig.pay.api_key}` // ambil dari config kamu
+const API_URL = "https://atlantich2h.com/deposit/create" // endpoint Atlantic Pedia
 
 export interface PaymentData {
   _id?: ObjectId
@@ -42,55 +40,42 @@ export async function createPayment(planId: string, username: string, email: str
     const nominal = plan.price + internalFee
     const transactionId = generateTransactionId()
 
-    // 🔐 Buat signature (md5 dari api_id + api_key)
-    const signature = crypto
-      .createHash("md5")
-      .update(`${API_ID}${API_KEY}${transactionId}`)
-      .digest("hex")
+    // 🔹 Siapkan form body (Atlantic pakai form-urlencoded)
+    const bodyData = new URLSearchParams()
+    bodyData.append("api_key", API_KEY)
+    bodyData.append("reff_id", transactionId)
+    bodyData.append("nominal", nominal.toString())
+    bodyData.append("type", "ewallet") // bisa disesuaikan ke bank/ewallet
+    bodyData.append("metode", "qris") // QRIS default
 
-    // 🔹 Siapkan body JSON untuk API Topupku
-    const bodyData = {
-      api_id: API_ID,
-      api_key: API_KEY,
-      nominal: nominal.toString(),
-      signature: signature,
-      reff_id: transactionId,
-      kode_bank: BANK_CODE,
-    }
-
-    const response = await fetch("https://topupku.com/api/payment", {
+    const response = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bodyData),
+      body: bodyData,
+      redirect: "follow",
     })
 
     const data = await response.json()
 
-    if (!response.ok || !data.success) {
-      throw new Error(data?.msg || "Gagal membuat pembayaran ke Topupku")
+    if (!response.ok || !data.status) {
+      throw new Error(data?.message || "Gagal membuat pembayaran ke Atlantic Pedia")
     }
 
     const payData = data.data
 
-    // 💰 Gunakan nilai dari API Topupku
-    const apiFee = Number(payData.fee) || 0
-    const totalBayar = Number(payData.total_bayar) || nominal
-    const totalDiterima = Number(payData.total_diterima) || plan.price
-
-    // 🧾 Data pembayaran untuk database
+    // 🧾 Buat data pembayaran untuk database
     const paymentData: PaymentData = {
       transactionId,
-      vpediaId: String(payData.trx_id),
+      vpediaId: String(payData.id),
       planId,
       username,
       email,
-      amount: totalDiterima,      // uang yang masuk tanpa fee
-      fee: internalFee + apiFee,  // total fee (internal + topupku)
-      total: totalBayar,          // total bayar sesuai QR API
-      qrImageUrl: `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(payData.kode_pembayaran)}`,
-      expirationTime: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
-      status: "pending",
-      createdAt: new Date().toISOString(),
+      amount: Number(payData.nominal), // jumlah yang dibayar user
+      fee: internalFee, // fee internal (Atlantic tidak beri fee tambahan)
+      total: Number(payData.nominal),
+      qrImageUrl: payData.qr_image, // dari response
+      expirationTime: new Date(payData.expired_at).toISOString(),
+      status: payData.status === "pending" ? "pending" : "failed",
+      createdAt: new Date(payData.created_at).toISOString(),
     }
 
     const client = await clientPromise
@@ -151,4 +136,4 @@ export async function updatePaymentStatus(
     console.error("Error updating payment status:", error)
     return false
   }
-  }
+}
