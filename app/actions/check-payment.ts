@@ -76,7 +76,7 @@ export async function checkPaymentStatus(transactionId: string) {
       const instantBody = new URLSearchParams()
       instantBody.append("api_key", API_KEY)
       instantBody.append("id", payment.vpediaId)
-      instantBody.append("action", "false")
+      instantBody.append("action", "true")
 
       const instantResponse = await fetch(`${API_BASE}/instant`, {
         method: "POST",
