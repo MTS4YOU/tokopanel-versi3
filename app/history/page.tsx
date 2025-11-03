@@ -24,6 +24,7 @@ import {
 import { CopyButton } from "@/components/copy-button"
 import { pterodactylConfig } from "@/data/config"
 import { plans } from "@/data/plans"
+import { getTransactionById } from "@/app/actions/get-transactions"
 
 interface TransactionHistory {
   transactionId: string
@@ -47,6 +48,8 @@ export default function HistoryPage() {
   const [selectedTransaction, setSelectedTransaction] = useState<TransactionHistory | null>(null)
   const [showDetails, setShowDetails] = useState(false)
   const [showSensitiveData, setShowSensitiveData] = useState(false)
+  const [loadingDetails, setLoadingDetails] = useState<string | null>(null)
+  const [loadingTransactions, setLoadingTransactions] = useState<{[key: string]: boolean}>({})
   const router = useRouter()
 
   useEffect(() => {
@@ -55,23 +58,52 @@ export default function HistoryPage() {
         const storedTransactions = localStorage.getItem("transactionHistory")
         if (storedTransactions) {
           let history = JSON.parse(storedTransactions)
-
-          // Fix any missing plan names by looking up the planId
-          history = history.map((transaction: any) => {
-            if (
-              !transaction.planName ||
-              transaction.planName === "Unknown" ||
-              transaction.planName === "Unknown Plan"
-            ) {
-              const plan = plans.find((p) => p.id === transaction.planId)
-              if (plan) {
-                transaction.planName = plan.name
+          
+          // Load all transactions from database
+          const updatedTransactions: TransactionHistory[] = []
+          
+          for (const transaction of history) {
+            try {
+              const dbTransaction = await getTransactionById(transaction.transactionId)
+              
+              if (dbTransaction) {
+                // Use data from database, fallback to local data
+                const updatedTransaction: TransactionHistory = {
+                  transactionId: dbTransaction.transactionId || transaction.transactionId,
+                  username: dbTransaction.username || transaction.username,
+                  email: dbTransaction.email || transaction.email,
+                  planId: dbTransaction.planId || transaction.planId,
+                  planName: dbTransaction.planName || transaction.planName,
+                  total: dbTransaction.total || transaction.total,
+                  createdAt: dbTransaction.createdAt || transaction.createdAt,
+                  status: dbTransaction.status || transaction.status,
+                  panelDetails: transaction.panelDetails // Keep panel details from local
+                }
+                updatedTransactions.push(updatedTransaction)
+              } else {
+                // If not found in DB, use local data and try to fix plan name
+                if (!transaction.planName || transaction.planName === "Unknown" || transaction.planName === "Unknown Plan") {
+                  const plan = plans.find((p) => p.id === transaction.planId)
+                  if (plan) {
+                    transaction.planName = plan.name
+                  }
+                }
+                updatedTransactions.push(transaction)
               }
+            } catch (error) {
+              console.error(`Error loading transaction ${transaction.transactionId}:`, error)
+              // Use local data as fallback
+              if (!transaction.planName || transaction.planName === "Unknown" || transaction.planName === "Unknown Plan") {
+                const plan = plans.find((p) => p.id === transaction.planId)
+                if (plan) {
+                  transaction.planName = plan.name
+                }
+              }
+              updatedTransactions.push(transaction)
             }
-            return transaction
-          })
-
-          setTransactions(history)
+          }
+          
+          setTransactions(updatedTransactions)
         }
       } catch (error) {
         console.error("Error loading transaction history:", error)
@@ -83,10 +115,42 @@ export default function HistoryPage() {
     loadTransactions()
   }, [])
 
-  const handleViewDetails = (transaction: TransactionHistory) => {
-    setSelectedTransaction(transaction)
-    setShowDetails(true)
-    setShowSensitiveData(false) // Reset sensitive data visibility when opening a new transaction
+  const handleViewDetails = async (transaction: TransactionHistory) => {
+    setLoadingDetails(transaction.transactionId)
+    try {
+      // Fetch latest transaction data from database
+      const dbTransaction = await getTransactionById(transaction.transactionId)
+      
+      if (dbTransaction) {
+        // Merge local data with database data
+        const updatedTransaction: TransactionHistory = {
+          ...transaction,
+          email: dbTransaction.email || transaction.email,
+          planId: dbTransaction.planId || transaction.planId,
+          planName: dbTransaction.planName || transaction.planName,
+          total: dbTransaction.total || transaction.total,
+          createdAt: dbTransaction.createdAt || transaction.createdAt,
+          status: dbTransaction.status || transaction.status,
+          // Keep existing panelDetails if not available from DB
+          panelDetails: transaction.panelDetails
+        }
+        
+        setSelectedTransaction(updatedTransaction)
+      } else {
+        // If not found in DB, use local data
+        setSelectedTransaction(transaction)
+      }
+      setShowDetails(true)
+      setShowSensitiveData(false)
+    } catch (error) {
+      console.error("Error fetching transaction details:", error)
+      // Fallback to local data if DB fetch fails
+      setSelectedTransaction(transaction)
+      setShowDetails(true)
+      setShowSensitiveData(false)
+    } finally {
+      setLoadingDetails(null)
+    }
   }
 
   const handleCloseDetails = () => {
@@ -109,13 +173,36 @@ export default function HistoryPage() {
   // Helper function to safely format dates
   const safeFormatDate = (dateString: string) => {
     try {
-      // Check if the date is valid
-      const date = new Date(dateString)
-      if (isNaN(date.getTime())) {
+      // Handle ISO format and other date formats
+      let date: Date
+      
+      // Check if it's already a valid Date object
+      if (dateString instanceof Date) {
+        date = dateString
+      } 
+      // Check if it's an ISO string
+      else if (typeof dateString === 'string') {
+        // Try parsing as ISO string first
+        date = new Date(dateString)
+        
+        // If invalid, try other common formats
+        if (isNaN(date.getTime())) {
+          // Try removing timezone info and parse
+          const withoutTimezone = dateString.replace(/[A-Z]/gi, ' ').trim()
+          date = new Date(withoutTimezone)
+          
+          // If still invalid, return fallback
+          if (isNaN(date.getTime())) {
+            return "Tanggal tidak valid"
+          }
+        }
+      } else {
         return "Tanggal tidak valid"
       }
+      
       return formatDate(date)
     } catch (error) {
+      console.error("Error formatting date:", error, dateString)
       return "Tanggal tidak valid"
     }
   }
@@ -126,6 +213,34 @@ export default function HistoryPage() {
       return text.replace(/./g, "•")
     }
     return text
+  }
+
+  // Refresh single transaction from database
+  const refreshTransaction = async (transactionId: string) => {
+    setLoadingTransactions(prev => ({...prev, [transactionId]: true}))
+    try {
+      const dbTransaction = await getTransactionById(transactionId)
+      
+      if (dbTransaction) {
+        setTransactions(prev => prev.map(transaction => 
+          transaction.transactionId === transactionId 
+            ? {
+                ...transaction,
+                email: dbTransaction.email || transaction.email,
+                planId: dbTransaction.planId || transaction.planId,
+                planName: dbTransaction.planName || transaction.planName,
+                total: dbTransaction.total || transaction.total,
+                createdAt: dbTransaction.createdAt || transaction.createdAt,
+                status: dbTransaction.status || transaction.status,
+              }
+            : transaction
+        ))
+      }
+    } catch (error) {
+      console.error(`Error refreshing transaction ${transactionId}:`, error)
+    } finally {
+      setLoadingTransactions(prev => ({...prev, [transactionId]: false}))
+    }
   }
 
   return (
@@ -215,9 +330,26 @@ export default function HistoryPage() {
                         </>
                       )}
                     </h3>
-                    <span className="text-xs bg-black/20 text-white px-2 py-1 rounded">
-                      {safeFormatDate(transaction.createdAt)}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs bg-black/20 text-white px-2 py-1 rounded">
+                        {safeFormatDate(transaction.createdAt)}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 w-6 p-0 hover:bg-black/30"
+                        onClick={() => refreshTransaction(transaction.transactionId)}
+                        disabled={loadingTransactions[transaction.transactionId]}
+                      >
+                        {loadingTransactions[transaction.transactionId] ? (
+                          <Loader2 className="w-3 h-3 animate-spin" />
+                        ) : (
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                        )}
+                      </Button>
+                    </div>
                   </div>
                   <CardContent className="p-4">
                     <div className="space-y-3">
@@ -238,11 +370,7 @@ export default function HistoryPage() {
                         <div>
                           <p className="text-xs text-gray-400">Paket</p>
                           <p className="font-medium text-white">
-                            {transaction.planName ||
-                              (() => {
-                                const plan = plans.find((p) => p.id === transaction.planId)
-                                return plan ? plan.name : "Unknown"
-                              })()}
+                            {transaction.planName}
                           </p>
                         </div>
                       </div>
@@ -254,8 +382,13 @@ export default function HistoryPage() {
                           size="sm"
                           className="bg-dark-500 border-dark-300 text-white"
                           onClick={() => handleViewDetails(transaction)}
+                          disabled={loadingDetails === transaction.transactionId}
                         >
-                          Detail
+                          {loadingDetails === transaction.transactionId ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            "Detail"
+                          )}
                         </Button>
                       </div>
                     </div>
@@ -338,11 +471,7 @@ export default function HistoryPage() {
                     <div>
                       <p className="text-sm text-gray-400">Paket</p>
                       <p className="font-medium text-white">
-                        {selectedTransaction.planName ||
-                          (() => {
-                            const plan = plans.find((p) => p.id === selectedTransaction.planId)
-                            return plan ? plan.name : "Unknown"
-                          })()}
+                        {selectedTransaction.planName}
                       </p>
                     </div>
                     <div>
