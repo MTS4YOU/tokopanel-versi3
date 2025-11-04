@@ -35,8 +35,8 @@ export const appConfig = {
     dbName: "zpay",
   },
   socialMedia: {
-    whatsapp: "https://wa.me/6283894064758",
+    whatsapp: "https://wa.me/6289513452028",
     tiktok: "https://xnxx.com",
-    instagram: "https://www.intagram.com/only48966"
+    instagram: "https://www.instagram.com/ig_mtsstore"
   }
 }
