@@ -55,23 +55,23 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Layanan</h3>
             <ul className="space-y-2">
               <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
+                <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
                   Panel Pterodactyl
                 </Link>
               </li>
               <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
+                <Link href="https://lynk.id/mtshosting" className="text-gray-400 hover:text-red-500 transition-colors">
                   Web Hosting
                 </Link>
               </li>
               <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
+                <Link href="https://lynk.id/mtshosting/page/tokovps" className="text-gray-400 hover:text-red-500 transition-colors">
                   VPS Hosting
                 </Link>
               </li>
               <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
-                  Domain
+                <Link href="https://lynk.id/mtshosting/34833yxy2k4d" className="text-gray-400 hover:text-red-500 transition-colors">
+                  Admin Panel
                 </Link>
               </li>
             </ul>
