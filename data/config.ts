@@ -36,7 +36,7 @@ export const appConfig = {
   },
   socialMedia: {
     whatsapp: "https://wa.me/6289513452028",
-    tiktok: "https://xnxx.com",
+    tiktok: "https://www.tiktok.com/@mts4you.xd",
     instagram: "https://www.instagram.com/ig_mtsstore"
   }
 }
