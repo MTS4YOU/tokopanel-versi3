@@ -81,23 +81,18 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Perusahaan</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="https://www.itzky.xyz/about" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Tentang Kami
-                </Link>
-              </li>
-              <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
+                <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
                   Kontak
                 </Link>
               </li>
               <li>
-                <Link href="https://www.itzky.xyz/blob" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Blog
+                <Link href="https://lynk.id/mts4youxd/page/groupsaluran" className="text-gray-400 hover:text-red-500 transition-colors">
+                  GroupSaluran
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Karir
+                <Link href="https://whatsapp.com/channel/0029VaslU1y6hENuTJDPi10L" className="text-gray-400 hover:text-red-500 transition-colors">
+                  MarketPlace
                 </Link>
               </li>
             </ul>
