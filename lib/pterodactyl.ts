@@ -1,4 +1,5 @@
 import { pterodactylConfig } from "@/data/config"
+import { plans } from "@/data/plans"
 
 interface UserAttributes {
   id: number
