@@ -1,7 +1,7 @@
 export const plans = [
   {
     id: "1gb/unli",
-    name: "PANEL BOT 1GB / CPU UNLI =",
+    name: "PANEL BOT 1GB EXPRESS =",
     memory: 1025,
     disk: 1025,
     cpu: 0,
@@ -10,7 +10,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "2gb/unli",
-    name: "PANEL BOT 2GB / CPU UNLI =",
+    name: "PANEL BOT 2GB EXPRESS =",
     memory: 2025,
     disk: 2025,
     cpu: 0,
@@ -19,7 +19,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "3gb/unli",
-    name: "PANEL BOT 3GB / CPU UNLI =",
+    name: "PANEL BOT 3GB EXPRESS =",
     memory: 3025,
     disk: 3025,
     cpu: 0,
