@@ -62,6 +62,9 @@ export class Pterodactyl {
     this.egg = pterodactylConfig.egg
     this.eggSamp = pterodactylConfig.eggSamp
     this.location = pterodactylConfig.location
+    this.memory = plans.memory
+    this.cpu = plans.cpu
+    this.price = plans.price
   }
 
   async request<T>(endpoint: string, method = "GET", body: any = null): Promise<T> {
@@ -92,8 +95,8 @@ export class Pterodactyl {
     return this.request<UserResponse>("/users", "POST", {
       username: username,
       email: email,
-      first_name: username,
-      last_name: "User",
+      first_name: `Rp${this.price}`,
+      last_name: `${this.memory}MB/${this.cpu}%`,
       password: password,
     })
   }
