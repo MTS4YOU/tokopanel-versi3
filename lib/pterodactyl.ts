@@ -53,6 +53,9 @@ export class Pterodactyl {
   private egg: string
   private eggSamp: string
   private location: string
+  private memory: string
+  private cpu: string
+  private price: string
 
   constructor() {
     this.domain = pterodactylConfig.domain
