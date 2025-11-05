@@ -1,6 +1,6 @@
 export const pterodactylConfig = {
-  domain: "https://nov111server-private221.mts4you.biz.id",
-  apiKey: "ptla_KsXgrlZYpHzaOCXvZIGj0j7BLxfYmQYXCwZL8DiwtYQ",
+  domain: "https://ayamgoreng157-private122.panelshop.biz.id",
+  apiKey: "ptla_lp8ROFV4e7fGAPpi9pqSlZzhn1IhXokROnjQoR1ZcAV",
   nests: "5",
   nestsGame: "2", // ga ubah di isi, ga perlu
   egg: "15",
