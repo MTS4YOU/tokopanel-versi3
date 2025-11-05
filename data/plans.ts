@@ -1,12 +1,12 @@
 export const plans = [
   {
     id: "1gb",
-    name: "PANEL BOT 1GB = ",
-    memory: 1000,
-    disk: 1000,
+    name: "PANEL BOT 1GB =",
+    memory: 1025,
+    disk: 1025,
     cpu: 40,
     price: 2000,
     description: "Paket hemat untuk keperluan ringan",
-    features: ["1GB RAM", "1GB Disk", "50% CPU", "Support 24/7"],
+    features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "⏱️ Masa Aktif ±1 Bulan", "🛠️ Garansi 10 Hari"],
   },
   ]
