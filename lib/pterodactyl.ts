@@ -118,7 +118,7 @@ async addServer(
 
   return this.request<ServerResponse>("/servers", "POST", {
     name: serverName,
-    description: "NodeJS 20 Server (egg: zakkiXD)",
+    description: "",
     user: userId,
     egg: Number.parseInt(this.egg),
     docker_image: dockerImage,
