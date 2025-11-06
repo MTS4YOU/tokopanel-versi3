@@ -117,7 +117,7 @@ async addServer(
   }
 
   return this.request<ServerResponse>("/servers", "POST", {
-    name: serverName,
+    name: username,
     description: "",
     user: userId,
     egg: Number.parseInt(this.egg),
