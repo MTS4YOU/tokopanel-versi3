@@ -1,5 +1,4 @@
 import { pterodactylConfig } from "@/data/config"
-import { plans } from "@/data/plans"
 
 interface UserAttributes {
   id: number
@@ -117,8 +116,8 @@ async addServer(
   }
 
   return this.request<ServerResponse>("/servers", "POST", {
-    name: username,
-    description: "",
+    name: serverName,
+    description: "NodeJS 20 Server (egg: zakkiXD)",
     user: userId,
     egg: Number.parseInt(this.egg),
     docker_image: dockerImage,
