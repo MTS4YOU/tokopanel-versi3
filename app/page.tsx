@@ -6,6 +6,7 @@ import { SocialMediaButton } from "@/components/social-media-button"
 import { InfoSection } from "@/components/info-section"
 import { StatsSection } from "@/components/stats-section"
 import { Footer } from "@/components/footer"
+import { FaqSection } from "@/components/faq"
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
           </div>
         </section>
 
+        <FaqSection />
         <InfoSection />
         <StatsSection />
         <Footer />
