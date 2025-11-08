@@ -102,7 +102,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">Bantuan</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
+                <Link href="#faq" className="text-gray-400 hover:text-red-500 transition-colors">
                   FAQ
                 </Link>
               </li>
