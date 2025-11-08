@@ -13,6 +13,10 @@ export const appConfig = {
   nameHost: "MTS4YOU XD", // nama host 
   feeMin: 10, //minimal fee
   feeMax: 50, // max fee 
+  garansi: {
+    warrantyDays: 10, // Limit hari
+    replaceLimit: 2, // Limit replace/claim
+  },
   pay: {
     api_key: "9p7EHmxrruq2WL3FayNNCIDF3pfOuVZo3L51Tj277JXoHEDvTmQEEAqqZZwmRUiX343LI7ftcVaC4dJQ6TJeNfMZDgwd1KGy7fjo",
   },
