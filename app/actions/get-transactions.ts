@@ -43,6 +43,14 @@ export async function getTransactionById(transactionId: string) {
       return null
     }
 
+    if (transaction.replaceUsed === undefined) {
+      await paymentsCollection.updateOne(
+        { transactionId },
+        { $set: { replaceUsed: 0 } }
+      )
+      transaction.replaceUsed = 0
+    }
+
     const plan = plans.find((p) => p.id === transaction.planId)
 
     return {
@@ -52,6 +60,29 @@ export async function getTransactionById(transactionId: string) {
   } catch (error) {
     console.error("Error getting transaction by ID:", error)
     return null
+  }
+}
+
+export async function updateTransactionReplace(id: string) {
+  try {
+    const client = await clientPromise
+    const db = client.db(appConfig.mongodb.dbName)
+    const paymentsCollection = db.collection("payments")
+
+    const trx = await paymentsCollection.findOne({ transactionId: id })
+    if (!trx) return null
+
+    const newReplaceUsed = (trx.replaceUsed || 0) + 1
+
+    await paymentsCollection.updateOne(
+      { transactionId: id },
+      { $set: { replaceUsed: newReplaceUsed } }
+    )
+
+    return { success: true, replaceUsed: newReplaceUsed }
+  } catch (error) {
+    console.error("Error updating transaction replace:", error)
+    return { success: false, error: error.message }
   }
 }
 
