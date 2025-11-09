@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "Apakah ada garansi?",
     answer:
-      "Ya, garansi berlaku 15 hari (1× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
+      "Ya, garansi berlaku 10 hari (1× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
   },
   { 
     question: "Bagaimana cara claim garansi?",
