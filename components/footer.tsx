@@ -61,7 +61,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="https://lynk.id/mtshosting" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Web Hosting
+                  Web Store
                 </Link>
               </li>
               <li>
