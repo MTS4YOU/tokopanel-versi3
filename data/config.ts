@@ -28,7 +28,7 @@ export const appConfig = {
       user: "mail.mts4youxd425@gmail.com", // Gmail buat ngirim ke Gmail buyer 
       pass: "joernukccwnrzpww", // sandi aplikasi 
     },
-    from: "Kurir Panel <mail.mts4youxd425@gmail.com>",
+    from: "Tukang Panel <mail.mts4youxd425@gmail.com>",
   }, // ganti sendiri 
   telegram: {
     botToken: "",
