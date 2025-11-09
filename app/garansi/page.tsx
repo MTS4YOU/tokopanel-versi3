@@ -99,8 +99,9 @@ export default function GaransiPage() {
   }
 
   return (
+    <Navbar />
     <div className="max-w-lg mx-auto mt-10 p-6 bg-dark-500 border border-dark-300 rounded-2xl shadow-lg">
-    < Navbar/>
+    
       <motion.h1
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -226,7 +227,7 @@ export default function GaransiPage() {
         <CalendarDays className="w-4 h-4" />
         Garansi berlaku {appConfig.garansi.warrantyDays} hari, maksimal {appConfig.garansi.replaceLimit} kali penggantian.
       </div>
-          < Footer/>
     </div>
+      <Footer />
   )
 }
