@@ -99,6 +99,7 @@ export default function GaransiPage() {
   }
 
   return (
+    <main> 
     <Navbar />
     <div className="max-w-lg mx-auto mt-10 p-6 bg-dark-500 border border-dark-300 rounded-2xl shadow-lg">
     
@@ -143,7 +144,7 @@ export default function GaransiPage() {
         </Button>
       </form>
 
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+      <Diaog open={showDialog} onOpenChange={setShowDialog}>
         <DialogContent className="sm:max-w-md bg-dark-400 border-dark-300 text-white">
           <DialogHeader>
             <DialogTitle className="text-xl text-red-400">
@@ -229,5 +230,6 @@ export default function GaransiPage() {
       </div>
     </div>
       <Footer />
+      </main>
   )
 }
