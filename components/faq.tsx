@@ -8,35 +8,36 @@ const faqs = [
   {
     question: "Apa itu panel Pterodactyl?",
     answer:
-      "Pterodactyl adalah platform manajemen server open-source berbasis web/apl yang memungkinkan Anda mengelola server game, bot WhatsApp, dan lainnya dengan mudah.",
+      "Pterodactyl adalah platform manajemen server open-source berbasis website yang memungkinkan Anda untuk mengelola server game, dan server bot dengan mudah.",
   },
   {
-    question: "Apakah saya bisa menjual ulang panel?",
+    question: "Apa kegunaan panel bot Pterodactyl?",
     answer:
-      "Tentu! Kamu bisa menjual ulang panel dan mengambil keuntungan dari penjualan tersebut, kekurangan nya adalah kamu tidak bisa mengambil semua hasil penjualan karena sebagian harus kamu pakai untuk order panel. Kami juga menyediakan akses reseller yang memungkinkan Anda membuat dan menjual panel sendiri dengan harga yang Anda tentukan.",
+      "Panel bot Pterodactyl memudahkan untuk menjalankan program bot pada WhatsApp dan Telegram.",
   },
   {
-    question: "Bagaimana cara membeli akses Reseller atau Root Admin?",
-    answer: "Untuk saat ini kami belum menyediakan fitur buy reseller, adp, pt dan owner panel. Jika kamu berminat kamu bisa menghubungi kami melalui WhatsApp untuk pembelian dengan cara klik ikon di pojok kanan bawah.",
+    question: "Apa keuntungannya menggunakan panel bot Pterodactyl?",
+    answer: 
+      "Mempermudah dan membuat peforma bot anda lebih stabil, dan tidak akan memakan kuota internet serta ruang penyimpanan pada device anda.",
   },
   {
-    question: "Metode pembayaran apa saja yang tersedia?",
+    question: "Metode pembayaran apa saja yang disediakan?",
     answer:
       "Kami menyediakan metoda pembayaran QRIS All Payment yang bisa menerima pembayaran dari semua payment yang support scan qris seperti e-wallet, bank dan sebagainya.",
   },
   {
-    question: "Berapa lama panel aktif setelah pembayaran?",
+    question: "Berapa lama masa aktif panel Pterodactyl?",
     answer:
-      "Panel akan aktif secara otomatis dalam hitungan detik setelah pembayaran berhasil dikonfirmasi dan data lengkapnya akan kami kirim ke email anda.",
+      "Panel akan aktif kurang lebih selama satu bulan (±30 Hari).",
   },
   {
-    question: "Apakah ada garansi?",
+    question: "Apakah ada garansi jika order di sini?",
     answer:
-      "Ya, garansi berlaku 10 hari (1× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
+      "Ada, garansi berlaku selama 10 hari (1× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
   },
   { 
     question: "Bagaimana cara claim garansi?",
-    answer: "Fitur claim garansi saat ini belum tersedia di website, untuk claim garansi kamu bisa menghubungi kami melalui WhatsApp di kontak cs dengan membawa bukti pembelian berupa screenshot invoice pembelian atau id transaksi.",
+    answer: "Anda bisa click pada short menu di pojok kanan atas, dan anda memerlukan ID transaksi serta alamat email yang tercantum pada halaman Riwayat Transaksi.",
   },
   {
   question: "Mengapa saya tidak bisa membeli dua panel dengan email yang sama?",
