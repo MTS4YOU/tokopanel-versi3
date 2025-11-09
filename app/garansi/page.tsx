@@ -9,6 +9,8 @@ import { motion } from "framer-motion"
 import { getTransactionById } from "@/app/actions/get-transactions"
 import { useRouter } from "next/navigation"
 import { appConfig } from "@/data/config"
+import Navbar from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import { CalendarDays, FileSearch, Loader2, PackageCheck } from "lucide-react"
 import { formatRupiah } from "@/lib/utils"
 import {
