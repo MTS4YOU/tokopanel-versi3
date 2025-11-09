@@ -105,7 +105,7 @@ export default function GaransiPage() {
         className="text-2xl font-bold text-center text-white mb-6 flex justify-center items-center gap-2"
       >
         <PackageCheck className="w-6 h-6 text-red-500" />
-        Cek Garansi Panel
+        Claim Garansi Panel
       </motion.h1>
 
       <form onSubmit={handleCheckWarranty} className="space-y-5">
