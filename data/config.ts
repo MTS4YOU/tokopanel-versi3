@@ -35,8 +35,8 @@ export const appConfig = {
     ownerId: "",
   },
   mongodb: {
-       uri: "mongodb+srv://tokopanelv3:C7bEZvG44lyQGLp6@mts4youxd.t0gtnum.mongodb.net/?appName=MTS4YOUXD", // url mongo mu
-    dbName: "MTS4YOUXD",
+    uri: "mongodb+srv://tokopanelv3:C7bEZvG44lyQGLp6@mts4youxd.t0gtnum.mongodb.net/?retryWrites=true&w=majority&appName=MTS4YOUXD", // url mongo mu
+dbName: "MTS4YOUXD",
   },
   socialMedia: {
     whatsapp: "https://wa.me/6289513452028",
