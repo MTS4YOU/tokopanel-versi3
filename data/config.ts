@@ -1,7 +1,7 @@
 export const pterodactylConfig = {
   domain: "https://ayamgoreng157-private122.panelshop.biz.id",
   apiKey: "ptla_lp8ROFV4e7fGAPpi9pqSlZzhn1IhXokROnjQoR1ZcAV",
-  nests: "5",
+  nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
   egg: "15",
   eggSamp: "16", // ga usah di isi, ga perlu
