@@ -39,26 +39,34 @@ export async function createPayment(planId: string, username: string, email: str
     const internalFee = calculateFee(plan.price)
     const nominal = plan.price + internalFee
     const transactionId = generateTransactionId()
-
-    // 🔹 Siapkan form body (Atlantic pakai form-urlencoded)
+    
     const bodyData = new URLSearchParams()
     bodyData.append("api_key", API_KEY)
     bodyData.append("reff_id", transactionId)
     bodyData.append("nominal", nominal.toString())
-    bodyData.append("type", "ewallet") // bisa disesuaikan ke bank/ewallet
-    bodyData.append("metode", "qris") // QRIS default
+    bodyData.append("type", "ewallet")
+    bodyData.append("metode", "qris")
 
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "User-Agent": "Mozilla/5.0",
-  },
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": "Mozilla/5.0",       
+        "Accept": "application/json",      
+      },
       body: bodyData,
       redirect: "follow",
     })
 
-    const data = await response.json()
+    const raw = await response.text()
+
+    let data
+    try {
+      data = JSON.parse(raw)
+    } catch {
+      console.error("Atlantic returned NON-JSON response:", raw)
+      throw new Error("Atlantic API tidak mengembalikan JSON (kemungkinan terblokir Cloudflare)")
+    }
 
     if (!response.ok || !data.status) {
       throw new Error(data?.message || "Gagal membuat pembayaran ke Atlantic Pedia")
@@ -66,17 +74,17 @@ export async function createPayment(planId: string, username: string, email: str
 
     const payData = data.data
 
-    // 🧾 Buat data pembayaran untuk database
+    // 🧾 Data pembayaran
     const paymentData: PaymentData = {
       transactionId,
       vpediaId: String(payData.id),
       planId,
       username,
       email,
-      amount: Number(payData.nominal), // jumlah yang dibayar user
-      fee: internalFee, // fee internal (Atlantic tidak beri fee tambahan)
+      amount: Number(payData.nominal),
+      fee: internalFee,
       total: Number(payData.nominal),
-      qrImageUrl: payData.qr_image, // dari response
+      qrImageUrl: payData.qr_image,
       expirationTime: new Date(payData.expired_at).toISOString(),
       status: payData.status === "pending" ? "pending" : "failed",
       createdAt: new Date(payData.created_at).toISOString(),
@@ -84,12 +92,12 @@ export async function createPayment(planId: string, username: string, email: str
 
     const client = await clientPromise
     const db = client.db(appConfig.mongodb.dbName)
-    const paymentsCollection = db.collection("payments")
-    await paymentsCollection.insertOne(paymentData)
+    await db.collection("payments").insertOne(paymentData)
 
     revalidatePath(`/invoice/${transactionId}`)
 
     return { success: true, transactionId }
+
   } catch (error) {
     console.error("Error creating payment:", error)
     return {
