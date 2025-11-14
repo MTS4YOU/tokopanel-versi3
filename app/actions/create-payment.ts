@@ -50,6 +50,10 @@ export async function createPayment(planId: string, username: string, email: str
 
     const response = await fetch(API_URL, {
       method: "POST",
+      headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "Mozilla/5.0",
+  },
       body: bodyData,
       redirect: "follow",
     })
