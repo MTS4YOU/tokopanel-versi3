@@ -6,104 +6,59 @@ import { plans } from "@/data/plans"
 import { createPanel } from "./create-panel"
 import { appConfig } from "@/data/config"
 
-const API_KEY = `${appConfig.pay.api_key}`
-const API_BASE = "https://atlantich2h.com/deposit"
+const API_ID = appConfig.pay.api_id
+const API_KEY = appConfig.pay.api_key
 
-interface AtlanticStatusResponse {
-  status: boolean
-  data?: {
-    id: string
-    reff_id: string
-    nominal: string
-    tambahan: string
-    fee: string
-    get_balance: string
-    metode: string
-    status: string // "pending" | "processing" | "success" | "failed"
-    created_at: string
-  }
-  code?: number
-}
-
-interface AtlanticInstantResponse {
-  status: boolean
-  data?: {
-    id: string
-    reff_id: string
-    nominal: number
-    penanganan: number
-    total_fee: number
-    total_diterima: number
-    status: string
-    created_at: string
-  }
-  code?: number
-}
+const API_STATUS_URL = "https://sakurupiah.id/api/status-transaction.php" 
 
 export async function checkPaymentStatus(transactionId: string) {
   try {
     const payment = await getPayment(transactionId)
     if (!payment) return { success: false, error: "Pembayaran tidak ditemukan" }
 
-    // ✅ Kalau sudah selesai, skip
-    if (payment.status === "completed")
+    if (payment.status === "completed") {
       return { success: true, status: "completed", panelDetails: payment.panelDetails }
+    }
 
-    // 🔹 Cek status pembayaran ke Atlantic
-    const bodyData = new URLSearchParams()
-    bodyData.append("api_key", API_KEY)
-    bodyData.append("id", payment.vpediaId)
+    const form = new FormData()
+    form.append("api_id", API_ID)
+    form.append("method", "status")
+    form.append("trx_id", payment.vpediaId) // kamu simpan trx_id di sini
 
-    const response = await fetch(`${API_BASE}/status`, {
+    const response = await fetch(API_STATUS_URL, {
       method: "POST",
-      body: bodyData,
-      redirect: "follow",
+      body: form,
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
     })
 
-    const data: AtlanticStatusResponse = await response.json()
-    if (!response.ok || !data.status)
-      return { success: false, error: "Gagal memeriksa status pembayaran" }
+    const raw = await response.text()
+    let data
 
-    const payStatus = data.data?.status?.toLowerCase()
+    try {
+      data = JSON.parse(raw)
+    } catch (e) {
+      console.error("Sakurupiah tidak mengembalikan JSON:", raw)
+      return { success: false, error: "Response Sakurupiah tidak valid" }
+    }
 
-    // 🟡 Jika status masih pending
-    if (payStatus === "pending") {
+    if (data.status !== "200") {
+      return { success: false, error: "Gagal cek status pembayaran" }
+    }
+
+    const status = data.data?.[0]?.status?.toLowerCase()
+
+    if (status === "pending") {
       return { success: true, status: "pending" }
     }
 
-    // 🟠 Jika status "processing" —> trigger instant deposit
-    if (payStatus === "processing") {
-      const instantBody = new URLSearchParams()
-      instantBody.append("api_key", API_KEY)
-      instantBody.append("id", payment.vpediaId)
-      instantBody.append("action", "true")
-
-      const instantResponse = await fetch(`${API_BASE}/instant`, {
-        method: "POST",
-        body: instantBody,
-        redirect: "follow",
-      })
-
-      const instantData: AtlanticInstantResponse = await instantResponse.json()
-      if (!instantResponse.ok || !instantData.status)
-        return { success: false, error: "Gagal memproses instant deposit" }
-
-      // Setelah diproses instan, kita tunggu sampai status success
-      if (instantData.data?.status === "success") {
-        await updatePaymentStatus(transactionId, "paid")
-      } else {
-        return { success: true, status: "processing" }
-      }
-    }
-
-    // 🟢 Kalau status "success" → lanjut buat panel
-    if (payStatus === "success") {
+    if (status === "berhasil") {
       await updatePaymentStatus(transactionId, "paid")
 
       const plan = plans.find((p) => p.id === payment.planId)
       if (!plan) return { success: false, error: "Plan tidak ditemukan" }
 
-      // 🔧 Buat panel otomatis
       const panelResult = await createPanel({
         username: payment.username,
         email: payment.email,
@@ -135,21 +90,10 @@ export async function checkPaymentStatus(transactionId: string) {
         status: "completed",
         panelDetails,
         showWhatsappPopup: true,
-        saveToHistory: true,
-        historyData: {
-          transactionId,
-          username: payment.username,
-          email: payment.email,
-          planName: plan.name,
-          total: payment.total,
-          createdAt: payment.createdAt,
-          status: "completed",
-        },
       }
     }
 
-    // 🔴 Kalau gagal
-    if (payStatus === "failed") {
+    if (status === "gagal") {
       await updatePaymentStatus(transactionId, "failed")
       return { success: true, status: "failed" }
     }
@@ -159,10 +103,7 @@ export async function checkPaymentStatus(transactionId: string) {
     console.error("Error checking payment status:", error)
     return {
       success: false,
-      error:
-        error instanceof Error
-          ? error.message
-          : "Terjadi kesalahan saat memeriksa status pembayaran",
+      error: error instanceof Error ? error.message : "Kesalahan memeriksa status pembayaran",
     }
   }
 }
