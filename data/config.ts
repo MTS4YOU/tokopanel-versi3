@@ -18,7 +18,8 @@ export const appConfig = {
     replaceLimit: 1, // Limit replace/claim
   },
   pay: {
-    api_key: "Rv72kZKckUEYD7EyGwH2jHa1L7uAjN6xSPCdU4DgK2fglJQxnSHB4yzS2xACXiTiCXALk0UtKCWvPqBF0NA54M4aHj4eW99IuajQ",
+    api_key: "api key sakurupiah",
+    api_id: "api id sakurupiah",
   },
   emailSender: {
     host: "mail.mts4youxd425@gmail.com", // Gmail host
