@@ -7,8 +7,9 @@ import clientPromise from "@/lib/mongodb"
 import { appConfig } from "@/data/config"
 import type { ObjectId } from "mongodb"
 
-const API_KEY = `${appConfig.pay.api_key}` // ambil dari config kamu
-const API_URL = "https://atlantich2h.com/deposit/create" // endpoint Atlantic Pedia
+const SAKURU_API_ID = appConfig.pay.api_id
+const SAKURU_API_KEY = appConfig.pay.api_key
+const SAKURU_API_URL = "https://sakurupiah.id/api/create.php"
 
 export interface PaymentData {
   _id?: ObjectId
@@ -24,11 +25,6 @@ export interface PaymentData {
   expirationTime: string
   status: "pending" | "paid" | "completed" | "failed"
   createdAt: string
-  panelDetails?: {
-    username: string
-    password: string
-    serverId: number
-  }
 }
 
 export async function createPayment(planId: string, username: string, email: string) {
@@ -38,60 +34,72 @@ export async function createPayment(planId: string, username: string, email: str
 
     const internalFee = calculateFee(plan.price)
     const nominal = plan.price + internalFee
-    const transactionId = generateTransactionId()
-    
-    const bodyData = new URLSearchParams()
-    bodyData.append("api_key", API_KEY)
-    bodyData.append("reff_id", transactionId)
-    bodyData.append("nominal", nominal.toString())
-    bodyData.append("type", "ewallet")
-    bodyData.append("metode", "qris")
 
-    const response = await fetch(API_URL, {
+    const transactionId = generateTransactionId()
+    const method = "QRIS2"
+    
+    const signature = crypto
+      .createHmac("sha256", SAKURU_API_KEY)
+      .update(SAKURU_API_ID + method + transactionId + nominal)
+      .digest("hex")
+
+    const bodyData = new URLSearchParams()
+    bodyData.append("api_id", SAKURU_API_ID)
+    bodyData.append("method", method)
+    bodyData.append("name", username)
+    bodyData.append("email", email)
+    bodyData.append("phone", "6280000000000") 
+    bodyData.append("amount", nominal.toString())
+    bodyData.append("merchant_fee", "1")
+    bodyData.append("merchant_ref", transactionId)
+    bodyData.append("expired", "24")
+    bodyData.append("produk[]", plan.name)
+    bodyData.append("qty[]", "1")
+    bodyData.append("harga[]", plan.price.toString())
+    bodyData.append("signature", signature)
+
+    const response = await fetch(SAKURU_API_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "User-Agent": "Mozilla/5.0",       
-        "Accept": "application/json",      
-      },
       body: bodyData,
-      redirect: "follow",
+      headers: {
+        Authorization: `Bearer ${SAKURU_API_KEY}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
     })
 
     const raw = await response.text()
 
-    let data
+    let json
     try {
-      data = JSON.parse(raw)
+      json = JSON.parse(raw)
     } catch {
-      console.error("Atlantic returned NON-JSON response:", raw)
-      throw new Error("Atlantic API tidak mengembalikan JSON (kemungkinan terblokir Cloudflare)")
+      console.error("Sakurupiah returned NON-JSON:", raw)
+      throw new Error("API Sakurupiah tidak mengembalikan JSON")
     }
 
-    if (!response.ok || !data.status) {
-      throw new Error(data?.message || "Gagal membuat pembayaran ke Atlantic Pedia")
+    if (json.status !== "200") {
+      throw new Error(json.message || "Gagal membuat invoice Sakurupiah")
     }
 
-    const payData = data.data
-
-    // 🧾 Data pembayaran
+    const pay = json.data[0]
     const paymentData: PaymentData = {
       transactionId,
-      vpediaId: String(payData.id),
+      vpediaId: pay.trx_id,
       planId,
       username,
       email,
-      amount: Number(payData.nominal),
+      amount: nominal,
       fee: internalFee,
-      total: Number(payData.nominal),
-      qrImageUrl: payData.qr_image,
-      expirationTime: new Date(payData.expired_at).toISOString(),
-      status: payData.status === "pending" ? "pending" : "failed",
-      createdAt: new Date(payData.created_at).toISOString(),
+      total: nominal,
+      qrImageUrl: pay.qr,
+      expirationTime: new Date(pay.expired).toISOString(),
+      status: pay.payment_status === "pending" ? "pending" : "failed",
+      createdAt: new Date().toISOString(),
     }
 
     const client = await clientPromise
     const db = client.db(appConfig.mongodb.dbName)
+
     await db.collection("payments").insertOne(paymentData)
 
     revalidatePath(`/invoice/${transactionId}`)
@@ -99,10 +107,10 @@ export async function createPayment(planId: string, username: string, email: str
     return { success: true, transactionId }
 
   } catch (error) {
-    console.error("Error creating payment:", error)
+    console.error("Error createPayment:", error)
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Terjadi kesalahan saat membuat pembayaran",
+      error: error instanceof Error ? error.message : "Terjadi kesalahan",
     }
   }
 }
