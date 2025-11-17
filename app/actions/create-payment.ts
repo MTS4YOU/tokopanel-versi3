@@ -57,7 +57,7 @@ export async function createPayment(planId: string, username: string, email: str
     bodyData.append("produk[]", plan.name)
     bodyData.append("qty[]", "1")
     bodyData.append("harga[]", plan.price.toString())
-    bodyData.append("callback_url", "https://panelshopv3.mts4you.biz.id/callback")
+    bodyData.append("callback_url", "https://panelshopv3.mts4you.biz.id/callback") 
     bodyData.append("return_url", "https://panelshopv3.mts4you.biz.id/invoice")
     bodyData.append("signature", signature)
 
