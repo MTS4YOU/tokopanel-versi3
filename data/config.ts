@@ -3,7 +3,7 @@ export const pterodactylConfig = {
   apiKey: "ptla_if23CBM9mS5CE1gOnLLxI1Dmv4SvFOLfKSkFXwIfAne",
   nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
-  egg: "15",
+  egg: "15", 
   eggSamp: "16", // ga usah di isi, ga perlu
   location: "1", // location panel 
 }
