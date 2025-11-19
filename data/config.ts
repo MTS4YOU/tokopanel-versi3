@@ -36,8 +36,8 @@ export const appConfig = {
     ownerId: "",
   },
   mongodb: {
-    uri: "mongodb+srv://zassxd:ardyjb111@zpay.1jst3iw.mongodb.net/?retryWrites=true&w=majority&appName=zpay", // url mongo mu
-dbName: "zpay",
+    uri: "mongodb+srv://tokspanels:tokspanels123@congor.s4haaui.mongodb.net/?retryWrites=true&w=majority&appName=Congor", // url mongo mu
+dbName: "Congor",
   },
   socialMedia: {
     whatsapp: "https://wa.me/6289513452028",
