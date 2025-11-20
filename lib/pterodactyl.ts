@@ -117,7 +117,7 @@ async addServer(
 
   return this.request<ServerResponse>("/servers", "POST", {
     name: serverName,
-    description: "NodeJS 20 Server (egg: zakkiXD)",
+    description: "Order Panel? Kunjungi:https://panelshopv3.mts4you.biz.id",
     user: userId,
     egg: Number.parseInt(this.egg),
     docker_image: dockerImage,
