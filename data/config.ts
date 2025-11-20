@@ -1,6 +1,6 @@
 export const pterodactylConfig = {
-  domain: "https://nasibakar128-publik231.pterodaactyl.biz.id",
-  apiKey: "ptla_JttQ4k04IoN0P8kxV4XDDNa0Zimb4WoDmagbU7gqVvK",
+  domain: process.env.domain,
+  apiKey: process.env.ptla,
   nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
   egg: "15", 
