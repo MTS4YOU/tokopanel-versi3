@@ -1,5 +1,5 @@
 export const pterodactylConfig = {
-  domain: process.env.domain_panel,
+  domain: "https://tokopanel157-private216.mts4you.biz.id",
   apiKey: process.env.ptla_panel,
   nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
