@@ -41,6 +41,7 @@ dbName: "Congor",
   },
   socialMedia: {
     whatsapp: "https://wa.me/6289513452028",
+    telegram: "https://t.me/mts4youxd",
     tiktok: "https://www.tiktok.com/@mts4you.xd",
     instagram: "https://www.instagram.com/ig_mtsstore"
   }
