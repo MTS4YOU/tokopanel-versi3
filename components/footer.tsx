@@ -52,7 +52,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Layanan</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">LAYANAN</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Perusahaan</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">MTS4YOU</h3>
             <ul className="space-y-2">
               <li>
                 <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
@@ -95,11 +95,36 @@ export function Footer() {
                   MarketPlace
                 </Link>
               </li>
+              <li>
+                <Link href="https://www.youtube.com/@mts_store_real" className="text-gray-400 hover:text-red-500 transition-colors">
+                  YT : MTS4YOU CHANEL
+                </Link>
+              </li>
+              <li>
+                <Link href="https://www.youtube.com/@mts4you_official_store" className="text-gray-400 hover:text-red-500 transition-colors">
+                  YT : MTS4YOU OFC
+                </Link>
+              </li>
+              <li>
+                <Link href="https://www.youtube.com/@mts4youxd_store" className="text-gray-400 hover:text-red-500 transition-colors">
+                  YT : MTS4YOU XD
+                </Link>
+              </li>
+              <li>
+                <Link href="https://instagram.com/ig_mtsstore" className="text-gray-400 hover:text-red-500 transition-colors">
+                  Instagram
+                </Link>
+              </li>
+              <li>
+                <Link href="https://www.tiktok.com/@mts4you.xd" className="text-gray-400 hover:text-red-500 transition-colors">
+                  TikTok
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">Bantuan</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">BANTUAN</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#faq" className="text-gray-400 hover:text-red-500 transition-colors">
@@ -107,20 +132,15 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Dokumentasi
-                </Link>
-              </li>
-              <li>
                 <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
-                  Komunitas
+                  Saluran Informasi
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-400 hover:text-red-500 transition-colors">
-                  Status Server
+                <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
+                  Kontak
                 </Link>
-              </li>
+              <li>
             </ul>
           </div>
         </div>
