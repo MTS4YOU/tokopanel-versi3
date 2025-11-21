@@ -140,7 +140,7 @@ export function Footer() {
                 <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
                   Kontak
                 </Link>
-              <li>
+              </li>
             </ul>
           </div>
         </div>
