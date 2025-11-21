@@ -92,7 +92,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="https://lynk.id/mts4youxd/page/groupsaluran" className="text-gray-400 hover:text-red-500 transition-colors">
-                  GroupSaluran
+                  Group dan Saluran
                 </Link>
               </li>
               <li>
@@ -102,17 +102,17 @@ export function Footer() {
               </li>
               <li>
                 <Link href="https://www.youtube.com/@mts_store_real" className="text-gray-400 hover:text-red-500 transition-colors">
-                  YT : MTS4YOU CHANEL
+                  YouTube (MTS4YOU CHANEL)
                 </Link>
               </li>
               <li>
                 <Link href="https://www.youtube.com/@mts4you_official_store" className="text-gray-400 hover:text-red-500 transition-colors">
-                  YT : MTS4YOU OFC
+                  YouTube (MTS4YOU OFC)
                 </Link>
               </li>
               <li>
                 <Link href="https://www.youtube.com/@mts4youxd_store" className="text-gray-400 hover:text-red-500 transition-colors">
-                  YT : MTS4YOU XD
+                  YouTube (MTS4YOU XD)
                 </Link>
               </li>
               <li>
@@ -143,7 +143,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
-                  Kontak
+                  WhatsApp
+                </Link>
+              </li>
+              <li>
+                <Link href={appConfig.socialMedia.telegram} className="text-gray-400 hover:text-red-500 transition-colors">
+                  Telegram
                 </Link>
               </li>
             </ul>
