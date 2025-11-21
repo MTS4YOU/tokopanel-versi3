@@ -22,7 +22,7 @@ export function InfoSection() {
     {
       icon: <Cpu className="w-10 h-10 text-red-500" />,
       title: "Spesifikasi Server",
-      description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan legal di Indonesia.",
+      description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan VPS kami legal di Indonesia.",
       delay: 0.4,
     },
     {
@@ -61,7 +61,7 @@ export function InfoSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-center text-gray-300 max-w-2xl mx-auto mb-12"
         >
-          Kami menyediakan layanan panel Pterodactyl terbaik dengan fitur lengkap dan harga terjangkau.
+          Kami menyediakan layanan panel bot Pterodactyl terbaik dengan kualitas terbaik dan harga terjangkau.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
