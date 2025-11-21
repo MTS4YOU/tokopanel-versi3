@@ -132,16 +132,6 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">BANTUAN</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#faq" className="text-gray-400 hover:text-red-500 transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
-                  Saluran Informasi
-                </Link>
-              </li>
-              <li>
                 <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
                   WhatsApp
                 </Link>
@@ -149,6 +139,16 @@ export function Footer() {
               <li>
                 <Link href={appConfig.socialMedia.telegram} className="text-gray-400 hover:text-red-500 transition-colors">
                   Telegram
+                </Link>
+              </li>
+              <li>
+                <Link href="#faq" className="text-gray-400 hover:text-red-500 transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href={appConfig.whatsappGroupLink} className="text-gray-400 hover:text-red-500 transition-colors">
+                  Saluran Informasi
                 </Link>
               </li>
             </ul>
