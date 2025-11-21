@@ -20,7 +20,7 @@ export function InfoSection() {
       delay: 0.2,
     },
     {
-      icon: <Memory className="w-10 h-10 text-red-500" />,
+      icon: <Server className="w-10 h-10 text-red-500" />,
       title: "Spesifikasi Server",
       description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan legal server Indonesia.",
       delay: 0.4,
