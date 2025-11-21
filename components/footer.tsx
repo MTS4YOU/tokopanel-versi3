@@ -78,11 +78,16 @@ export function Footer() {
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">MTS4YOU</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">ADMIN</h3>
             <ul className="space-y-2">
               <li>
                 <Link href={appConfig.socialMedia.whatsapp} className="text-gray-400 hover:text-red-500 transition-colors">
-                  Kontak
+                  WhatsApp
+                </Link>
+              </li>
+              <li>
+                <Link href={appConfig.socialMedia.telegram} className="text-gray-400 hover:text-red-500 transition-colors">
+                  Telegram
                 </Link>
               </li>
               <li>
