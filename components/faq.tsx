@@ -20,26 +20,6 @@ const faqs = [
     answer: 
       "Mempermudah dan membuat peforma bot anda lebih stabil, dan tidak akan memakan kuota internet serta ruang penyimpanan pada device anda.",
   },
-  {
-    question: "Bagaimana Spesifikasi server di sini?",
-    answer:
-      "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) legal server Indonesia.",
-  },
-  {
-    question: "Metode pembayaran apa saja yang disediakan?",
-    answer:
-      "Kami menyediakan metoda pembayaran QRIS All Payment yang bisa menerima pembayaran dari semua payment yang support scan qris seperti e-wallet, bank dan sebagainya.",
-  },
-  {
-    question: "Berapa lama masa aktif panel Pterodactyl saya?",
-    answer:
-      "Masa aktif panel akan aktif kurang lebih selama satu bulan (±30 Hari).",
-  },
-  {
-    question: "Apakah ada garansi jika order di sini?",
-    answer:
-      "Ada, garansi berlaku selama 12 hari (3× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
-  },
   { 
     question: "Bagaimana cara claim garansi?",
     answer: "Anda bisa click pada short menu di pojok kanan atas, dan anda memerlukan ID transaksi serta alamat email yang tercantum pada halaman Riwayat Transaksi.",
@@ -47,12 +27,12 @@ const faqs = [
   {
   question: "Mengapa saya tidak bisa membeli dua panel dengan email yang sama?",
   answer: "Sistem Pterodactyl tidak mengizinkan penggunaan email atau username yang sama untuk lebih dari satu akun. Hal ini dilakukan untuk mencegah konflik data antar akun dan menjaga integritas sistem panel.",
-},
-{
-  question: "Apa perbedaan antara Panel Publik dan Panel Private?",
+  },
+  {
+  question: "Apa perbedaan antara panel Publik dan panel Private?",
   answer: "Panel Private menawarkan tingkat keamanan yang lebih tinggi, performa server yang lebih stabil, serta sumber daya (RAM dan CPU) yang tidak mudah terpakai oleh pengguna lain. Panel ini sangat cocok bagi kamu yang membutuhkan performa maksimal dan uptime tinggi. Sementara itu, Panel Publik lebih terjangkau namun berbagi resource dengan pengguna lain, sehingga cocok untuk kebutuhan ringan dan percobaan.",
-},
- {
+  },
+  {
   question: "Bagaimana jika saya lupa password panel?",
   answer: "Silakan klik tombol 'Forgot Password' yang terdapat di bawah form login Pterodactyl, lalu masukkan email panel yang kamu gunakan. Jika email tersebut terdaftar, sistem akan otomatis mengirimkan link reset password ke email tersebut. Karena itu, kami sangat menyarankan untuk selalu menggunakan email aktif saat membeli panel agar proses pemulihan akun lebih mudah.",
   }
