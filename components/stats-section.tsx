@@ -14,9 +14,9 @@ interface StatsData {
 
 export function StatsSection() {
   const [stats, setStats] = useState<StatsData>({
-    totalUsers: 823,
-    totalServers: 823,
-    totalPurchases: 823,
+    totalUsers: 0,
+    totalServers: 0,
+    totalPurchases: 0,
   })
 
   useEffect(() => {
