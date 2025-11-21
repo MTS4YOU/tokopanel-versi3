@@ -15,7 +15,7 @@ export const appConfig = {
   feeMax: 50, // max fee 
   garansi: {
     warrantyDays: 12, // Limit hari
-    replaceLimit: 1, // Limit replace/claim
+    replaceLimit: 3, // Limit replace/claim
   },
   pay: {
     api_key: "KEY-Dq4VmT7PQorsWotGvyczJnsBfcx",
