@@ -3,33 +3,39 @@
 import type React from "react"
 
 import { motion } from "framer-motion"
-import { Shield, Zap, Cpu, CreditCard } from "lucide-react"
+import { Shield, Zap, Cpu, Clock, CreditCard } from "lucide-react"
 
 export function InfoSection() {
   const features = [
     {
       icon: <Shield className="w-10 h-10 text-red-500" />,
       title: "Keamanan Terjamin",
-      description: "Panel Pterodactyl kami menjamin keamanan data dan server Anda dengan sistem keamanan terbaik.",
+      description: "Panel Pterodactyl kami menjamin keamanan data dan privasi Anda dengan sistem keamanan terbaik.",
       delay: 0,
     },
     {
       icon: <Zap className="w-10 h-10 text-red-500" />,
       title: "Performa Tinggi",
-      description: "Nikmati performa server yang cepat dan stabil untuk menjalankan aplikasi Anda tanpa kendala.",
+      description: "Nikmati performa server yang cepat dan stabil untuk menjalankan bot Anda tanpa kendala.",
       delay: 0.2,
     },
     {
       icon: <Cpu className="w-10 h-10 text-red-500" />,
       title: "Spesifikasi Server",
-      description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan legal server Indonesia.",
+      description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan legal di Indonesia.",
       delay: 0.4,
+    },
+    {
+      icon: <Clock className="w-10 h-10 text-red-500" />,
+      title: "Uptime Server",
+      description: "Kami menjamin panel anda akan aktif 24jam nonstop sehingga bot Anda akan selalu online dan dapat diakses.",
+      delay: 0.6,
     },
     {
       icon: <CreditCard className="w-10 h-10 text-red-500" />,
       title: "Pembayaran Mudah",
-      description: "Proses pembayaran yang mudah dan cepat dengan berbagai metode pembayaran yang tersedia.",
-      delay: 0.6,
+      description: "Proses pembayaran yang mudah dan cepat dengan metode pembayaran QRIS all payment.",
+      delay: 0.8,
     },
   ]
 
