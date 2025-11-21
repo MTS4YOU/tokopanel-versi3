@@ -10,18 +10,18 @@ export function InfoSection() {
     {
       icon: <Shield className="w-10 h-10 text-red-500" />,
       title: "KEAMANAN TERJAMIN",
-      description: "Panel Pterodactyl kami menjamin keamanan data dan privasi Anda dengan sistem keamanan terbaik.",
+      description: "Kami menjamin keamanan data dan privasi panel Anda dengan sistem keamanan terbaik.",
       delay: 0,
     },
     {
       icon: <Zap className="w-10 h-10 text-red-500" />,
-      title: "PERFORMA TINGGI",
-      description: "Nikmati performa server yang cepat dan stabil untuk menjalankan bot Anda tanpa kendala.",
+      title: "PERFORMA SERVER",
+      description: "Nikmati performa server 2.7GHz yang cepat dan stabil untuk menjalankan bot Anda tanpa kendala.",
       delay: 0.2,
     },
     {
       icon: <CalendarClock className="w-10 h-10 text-red-500" />,
-      title: "MASA AKTIF",
+      title: "MASA AKTIF PANEL",
       description: "Masa aktif panel hanya 1 bulan, dengan garansi aktif 12 hari (3× replace).",
       delay: 0.4,
     },
