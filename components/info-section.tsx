@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { motion } from "framer-motion"
-import { Shield, Zap, Hard-drive, CreditCard } from "lucide-react"
+import { Shield, Zap, Cpu, CreditCard } from "lucide-react"
 
 export function InfoSection() {
   const features = [
@@ -20,7 +20,7 @@ export function InfoSection() {
       delay: 0.2,
     },
     {
-      icon: <Hard-drive className="w-10 h-10 text-red-500" />,
+      icon: <Cpu className="w-10 h-10 text-red-500" />,
       title: "Spesifikasi Server",
       description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan legal server Indonesia.",
       delay: 0.4,
