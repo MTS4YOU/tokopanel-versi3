@@ -51,19 +51,19 @@ export function StatsSection() {
             icon={<Users className="w-8 h-8 text-red-500" />}
             title="Total Pengguna"
             value={stats.totalUsers}
-            delay={1}
+            delay={0.2}
           />
           <StatCard
             icon={<Server className="w-8 h-8 text-red-500" />}
             title="Total Server"
             value={stats.totalServers}
-            delay={1}
+            delay={0.4}
           />
           <StatCard
             icon={<ShoppingBag className="w-8 h-8 text-red-500" />}
             title="Pembelian Sukses"
             value={stats.totalPurchases}
-            delay={1}
+            delay={0.6}
           />
         </div>
       </div>
