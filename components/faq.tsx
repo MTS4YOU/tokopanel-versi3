@@ -21,19 +21,24 @@ const faqs = [
       "Mempermudah dan membuat peforma bot anda lebih stabil, dan tidak akan memakan kuota internet serta ruang penyimpanan pada device anda.",
   },
   {
+    question: "Bagaimana Spesifikasi server di sini?",
+    answer:
+      "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) legal server Indonesia.",
+  },
+  {
     question: "Metode pembayaran apa saja yang disediakan?",
     answer:
       "Kami menyediakan metoda pembayaran QRIS All Payment yang bisa menerima pembayaran dari semua payment yang support scan qris seperti e-wallet, bank dan sebagainya.",
   },
   {
-    question: "Berapa lama masa aktif panel Pterodactyl?",
+    question: "Berapa lama masa aktif panel Pterodactyl saya?",
     answer:
-      "Panel akan aktif kurang lebih selama satu bulan (±30 Hari).",
+      "Masa aktif panel akan aktif kurang lebih selama satu bulan (±30 Hari).",
   },
   {
     question: "Apakah ada garansi jika order di sini?",
     answer:
-      "Ada, garansi berlaku selama 10 hari (1× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
+      "Ada, garansi berlaku selama 12 hari (3× replace), kami memberikan garansi penuh atau penggantian panel baru jika terjadi sesuatu pada server panel anda dalam masa garansi.",
   },
   { 
     question: "Bagaimana cara claim garansi?",
