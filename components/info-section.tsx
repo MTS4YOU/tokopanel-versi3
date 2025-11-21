@@ -11,7 +11,7 @@ export function InfoSection() {
       icon: <Shield className="w-10 h-10 text-red-500" />,
       title: "KEAMANAN TERJAMIN",
       description: "Kami menjamin keamanan data dan privasi panel Anda dengan sistem keamanan terbaik.",
-      delay: 0,
+      delay: 0.2,
     },
     {
       icon: <Zap className="w-10 h-10 text-red-500" />,
@@ -29,19 +29,19 @@ export function InfoSection() {
       icon: <Cpu className="w-10 h-10 text-red-500" />,
       title: "SPESIFIKASI SERVER",
       description: "Server kami menggunakan VPS (RAM 32GB/16 CORE • NVMe 128GB) dan VPS kami legal di Indonesia.",
-      delay: 0.6,
+      delay: 0.4,
     },
     {
       icon: <Clock className="w-10 h-10 text-red-500" />,
       title: "UPTIME SERVER",
       description: "Kami menjamin panel anda akan aktif 24jam nonstop sehingga bot Anda akan selalu online dan dapat diakses.",
-      delay: 0.8,
+      delay: 0.6,
     },
     {
       icon: <CreditCard className="w-10 h-10 text-red-500" />,
       title: "PEMBAYARAN MUDAH",
       description: "Proses pembayaran yang mudah dan cepat dengan metode pembayaran QRIS all payment.",
-      delay: 0.8,
+      delay: 0.6,
     },
   ]
 
