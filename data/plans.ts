@@ -154,7 +154,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "7,5gb",
-    name: "PANEL BOT 7GB =",
+    name: "PANEL BOT 7,5GB =",
     memory: 7525,
     disk: 7525,
     cpu: 300,
