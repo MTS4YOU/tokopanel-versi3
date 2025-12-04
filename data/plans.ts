@@ -1,7 +1,7 @@
 export const plans = [
   {
     id: "1gb/unli",
-    name: "PANEL BOT 1GB EXPRESS =",
+    name: "PANEL BOT 1GB EXPRESS",
     memory: 1025,
     disk: 1025,
     cpu: 0,
@@ -10,7 +10,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "2gb/unli",
-    name: "PANEL BOT 2GB EXPRESS =",
+    name: "PANEL BOT 2GB EXPRESS",
     memory: 2025,
     disk: 2025,
     cpu: 0,
@@ -19,7 +19,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "3gb/unli",
-    name: "PANEL BOT 3GB EXPRESS =",
+    name: "PANEL BOT 3GB EXPRESS",
     memory: 3025,
     disk: 3025,
     cpu: 0,
@@ -28,7 +28,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "unlimited",
-    name: "PANEL BOT UNLIMITED =",
+    name: "PANEL BOT UNLIMITED",
     memory: 0,
     disk: 0,
     cpu: 0,
@@ -37,7 +37,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "1gb",
-    name: "PANEL BOT 1GB =",
+    name: "PANEL BOT 1GB",
     memory: 1025,
     disk: 1025,
     cpu: 40,
@@ -46,7 +46,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "1,5gb",
-    name: "PANEL BOT 1,5GB =",
+    name: "PANEL BOT 1,5GB",
     memory: 1525,
     disk: 1525,
     cpu: 60,
@@ -55,7 +55,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "2gb",
-    name: "PANEL BOT 2GB =",
+    name: "PANEL BOT 2GB",
     memory: 2025,
     disk: 2025,
     cpu: 80,
@@ -64,7 +64,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "2,5gb",
-    name: "PANEL BOT 2,5GB =",
+    name: "PANEL BOT 2,5GB",
     memory: 2525,
     disk: 2525,
     cpu: 100,
@@ -73,7 +73,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "3gb",
-    name: "PANEL BOT 3GB =",
+    name: "PANEL BOT 3GB",
     memory: 3025,
     disk: 3025,
     cpu: 120,
@@ -82,7 +82,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "3,5gb",
-    name: "PANEL BOT 3,5GB =",
+    name: "PANEL BOT 3,5GB",
     memory: 3525,
     disk: 3525,
     cpu: 140,
@@ -91,7 +91,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "4gb",
-    name: "PANEL BOT 4GB =",
+    name: "PANEL BOT 4GB",
     memory: 4025,
     disk: 4025,
     cpu: 160,
@@ -100,7 +100,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "4,5gb",
-    name: "PANEL BOT 4,5GB =",
+    name: "PANEL BOT 4,5GB",
     memory: 4525,
     disk: 4525,
     cpu: 180,
@@ -109,7 +109,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "5gb",
-    name: "PANEL BOT 5GB =",
+    name: "PANEL BOT 5GB",
     memory: 5025,
     disk: 5025,
     cpu: 200,
@@ -118,7 +118,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "5,5gb",
-    name: "PANEL BOT 5,5GB =",
+    name: "PANEL BOT 5,5GB",
     memory: 5525,
     disk: 5525,
     cpu: 220,
@@ -127,7 +127,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "6gb",
-    name: "PANEL BOT 6GB =",
+    name: "PANEL BOT 6GB",
     memory: 6025,
     disk: 6025,
     cpu: 240,
@@ -136,7 +136,7 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "6,5gb",
-    name: "PANEL BOT 6,5GB =",
+    name: "PANEL BOT 6,5GB",
     memory: 6525,
     disk: 6525,
     cpu: 260,
@@ -145,12 +145,21 @@ export const plans = [
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
     id: "7gb",
-    name: "PANEL BOT 7GB =",
+    name: "PANEL BOT 7GB",
     memory: 7025,
     disk: 7025,
     cpu: 280,
     price: 14000,
     description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗦𝘁𝗮𝗻𝗱𝗮𝗿",
+    features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
+  },  {
+    id: "unlimited",
+    name: "PANEL BOT UNLIMITED",
+    memory: 0,
+    disk: 0,
+    cpu: 0,
+    price: 15000,
+    description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗕𝗲𝗿𝗮𝘁",
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },
   ]
