@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { createPayment } from "@/app/actions/create-payment"
 import { checkUserExists } from "@/app/actions/check-user-exists"
 import { plans } from "@/data/plans"
@@ -163,26 +162,42 @@ export default function PanelForm() {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="plan" className="text-base font-medium flex items-center gap-2">
+        <div className="space-y-3">
+          <Label className="text-base font-medium flex items-center gap-2">
             <Package className="w-4 h-4 text-red-500" />
             Pilih Paket
           </Label>
-          <Select value={selectedPlan} onValueChange={setSelectedPlan}>
-            <SelectTrigger id="plan" className="w-full h-14 text-base bg-dark-500 border-dark-300">
-              <SelectValue placeholder="Pilih paket" />
-            </SelectTrigger>
-            <SelectContent className="bg-dark-400 border-dark-300">
-              {plans.map((plan) => (
-                <SelectItem key={plan.id} value={plan.id} className="py-3 focus:bg-dark-500 focus:text-white">
-                  <div className="flex justify-between items-center w-full">
-                    <span>{plan.name}</span>
-                    <span className="text-red-400 font-medium">{formatRupiah(plan.price)}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {plans.map((plan) => (
+              <motion.div
+                key={plan.id}
+                onClick={() => setSelectedPlan(plan.id)}
+                className={`relative p-4 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
+                  selectedPlan === plan.id
+                    ? "bg-red-500/10 border-red-500 shadow-lg shadow-red-500/20"
+                    : "bg-dark-500 border-dark-300 hover:border-red-500/50"
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {selectedPlan === plan.id && (
+                  <div className="absolute top-2 right-2 bg-red-500 rounded-full p-1">
+                    <Check className="w-4 h-4 text-white" />
                   </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+                )}
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-medium text-white text-sm flex-1 pr-2">{plan.name}</h3>
+                </div>
+                <div className="text-red-400 font-bold mb-2">{formatRupiah(plan.price)}</div>
+                <div className="text-xs text-gray-400 space-y-1 mb-3">
+                  <div>💾 RAM: {plan.memory} MB</div>
+                  <div>🗄️ Disk: {plan.disk} MB</div>
+                  <div>⚙️ CPU: {plan.cpu}%</div>
+                </div>
+                <p className="text-xs text-gray-300 line-clamp-2">{plan.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {selectedPlan && (
