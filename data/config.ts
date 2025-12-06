@@ -6,8 +6,7 @@ export const pterodactylConfig = {
   egg: "15", 
   eggSamp: "16", // ga usah di isi, ga perlu
   location: "1", // location panel 
-}
-
+},
 export const appConfig = {
   whatsappGroupLink: "https://whatsapp.com/channel/0029VbBHzkt1t90Z4H55f638", // link group
   nameHost: "MTS4YOU XD", // nama host 
