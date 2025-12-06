@@ -2,7 +2,7 @@
   "buildCommand": "next build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "nodejs": "25.x",
+  "nodejs": "20.x",
   "env": {
     "MONGODB_URI": "@mongodb_uri",
     "MONGODB_DB_NAME": "@mongodb_db_name",
