@@ -36,7 +36,7 @@ async function connectToDatabase(): Promise<CachedConnection> {
 export async function GET() {
   try {
     const { db } = await connectToDatabase()
-    const settings = await db.collection("settings").findOne({ _id: "app_config" })
+    const settings = await db.collection<any>("settings").findOne({ _id: "app_config" })
 
     return Response.json(settings || {}, { status: 200 })
   } catch (error) {
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
 
     const { db } = await connectToDatabase()
 
-    const result = await db.collection("settings").updateOne(
+    const result = await db.collection<any>("settings").updateOne(
       { _id: "app_config" },
       {
         $set: {
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
     )
 
     // Log the change for audit trail
-    await db.collection("audit_logs").insertOne({
+    await db.collection<any>("audit_logs").insertOne({
       timestamp: new Date(),
       action: "UPDATE_SETTINGS",
       changes: body,
@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     // Log the error
     try {
       const { db } = await connectToDatabase()
-      await db.collection("audit_logs").insertOne({
+      await db.collection<any>("audit_logs").insertOne({
         timestamp: new Date(),
         action: "UPDATE_SETTINGS",
         status: "ERROR",

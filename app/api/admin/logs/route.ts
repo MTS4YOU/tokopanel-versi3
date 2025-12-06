@@ -40,14 +40,14 @@ export async function GET(request: Request) {
 
     const { db } = await connectToDatabase()
     const logs = await db
-      .collection("audit_logs")
+      .collection<any>("audit_logs")
       .find({})
       .sort({ timestamp: -1 })
       .limit(limit)
       .skip(skip)
       .toArray()
 
-    const total = await db.collection("audit_logs").countDocuments()
+    const total = await db.collection<any>("audit_logs").countDocuments()
 
     return Response.json(
       {
