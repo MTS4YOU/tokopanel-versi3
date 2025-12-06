@@ -1,4 +1,5 @@
 import { MongoClient, Db } from "mongodb"
+import { NextResponse } from "next/server"
 
 interface CachedConnection {
   client: MongoClient
@@ -40,7 +41,7 @@ export async function GET() {
     const settings = await db.collection<any>("settings").findOne({ _id: "app_config" })
 
     if (!settings) {
-      return Response.json({ error: "No settings found to backup" }, { status: 404 })
+      return NextResponse.json({ error: "No settings found to backup" }, { status: 404 })
     }
 
     // Create backup record
@@ -60,7 +61,7 @@ export async function GET() {
       status: "SUCCESS",
     })
 
-    return Response.json(
+    return NextResponse.json(
       {
         success: true,
         message: "Backup berhasil dibuat",
@@ -72,7 +73,7 @@ export async function GET() {
   } catch (error) {
     console.error("Error creating backup:", error)
     const message = error instanceof Error ? error.message : "Failed to create backup"
-    return Response.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -82,7 +83,7 @@ export async function POST(req: Request) {
     const { backupId } = body
 
     if (!backupId) {
-      return Response.json({ error: "Backup ID diperlukan" }, { status: 400 })
+      return NextResponse.json({ error: "Backup ID diperlukan" }, { status: 400 })
     }
 
     const { db } = await connectToDatabase()
@@ -91,7 +92,7 @@ export async function POST(req: Request) {
     const backup = await db.collection<any>("backups").findOne({ _id: backupId })
 
     if (!backup) {
-      return Response.json({ error: "Backup tidak ditemukan" }, { status: 404 })
+      return NextResponse.json({ error: "Backup tidak ditemukan" }, { status: 404 })
     }
 
     // Restore settings
@@ -109,7 +110,7 @@ export async function POST(req: Request) {
       status: "SUCCESS",
     })
 
-    return Response.json(
+    return NextResponse.json(
       {
         success: true,
         message: "Settings berhasil dipulihkan dari backup",
@@ -121,6 +122,6 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Error restoring backup:", error)
     const message = error instanceof Error ? error.message : "Failed to restore backup"
-    return Response.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

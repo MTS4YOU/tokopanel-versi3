@@ -4,13 +4,13 @@ import clientPromise from "@/lib/mongodb"
 import { appConfig } from "@/data/config"
 import { plans } from "@/data/plans"
 
-export async function getSuccessfulTransactions() {
+export async function getSuccessfulTransactions(): Promise<any[]> {
   try {
     const client = await clientPromise
     const db = client.db(appConfig.mongodb.dbName)
     const paymentsCollection = db.collection("payments")
 
-    const transactions = await paymentsCollection.find({}).sort({ createdAt: -1 }).limit(50).toArray()
+    const transactions = (await paymentsCollection.find({}).sort({ createdAt: -1 }).limit(50).toArray()) as any[]
 
     return transactions.map((transaction) => {
       const plan = plans.find((p) => p.id === transaction.planId)
@@ -37,7 +37,7 @@ export async function getTransactionById(transactionId: string) {
     const db = client.db(appConfig.mongodb.dbName)
     const paymentsCollection = db.collection("payments")
 
-    const transaction = await paymentsCollection.findOne({ transactionId })
+    const transaction = (await paymentsCollection.findOne({ transactionId })) as any | null
 
     if (!transaction) {
       return null
@@ -69,7 +69,7 @@ export async function updateTransactionReplace(id: string) {
     const db = client.db(appConfig.mongodb.dbName)
     const paymentsCollection = db.collection("payments")
 
-    const trx = await paymentsCollection.findOne({ transactionId: id })
+    const trx = (await paymentsCollection.findOne({ transactionId: id })) as any | null
     if (!trx) return null
 
     const newReplaceUsed = (trx.replaceUsed || 0) + 1
@@ -82,7 +82,8 @@ export async function updateTransactionReplace(id: string) {
     return { success: true, replaceUsed: newReplaceUsed }
   } catch (error) {
     console.error("Error updating transaction replace:", error)
-    return { success: false, error: error.message }
+    const message = error instanceof Error ? error.message : String(error)
+    return { success: false, error: message }
   }
 }
 

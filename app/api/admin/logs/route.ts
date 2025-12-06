@@ -1,4 +1,5 @@
 import { MongoClient, Db } from "mongodb"
+import { NextResponse } from "next/server"
 
 interface CachedConnection {
   client: MongoClient
@@ -49,7 +50,7 @@ export async function GET(request: Request) {
 
     const total = await db.collection<any>("audit_logs").countDocuments()
 
-    return Response.json(
+    return NextResponse.json(
       {
         logs,
         total,
@@ -61,6 +62,6 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error("Error fetching audit logs:", error)
     const message = error instanceof Error ? error.message : "Failed to fetch audit logs"
-    return Response.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

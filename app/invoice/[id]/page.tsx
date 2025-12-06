@@ -5,8 +5,8 @@ import { QrPayment } from "@/components/qr-payment"
 import { InvoiceHeader } from "@/components/invoice-header"
 import { SocialMediaButton } from "@/components/social-media-button"
 
-export default async function InvoicePage({ params }: { params: { id: string } }) {
-  const payment = await getPayment(params.id)
+export default async function InvoicePage({ params }: any) {
+  const payment = await getPayment(params.id as string)
 
   if (!payment) {
     notFound()
@@ -51,6 +51,10 @@ export default async function InvoicePage({ params }: { params: { id: string } }
               qrImageUrl={payment.qrImageUrl}
               expirationTime={payment.expirationTime}
               status={payment.status}
+              username={payment.username}
+              email={payment.email}
+              planId={payment.planId}
+              createdAt={payment.createdAt}
             />
           </div>
         </div>

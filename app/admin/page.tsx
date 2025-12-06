@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import type { Settings as SettingsType } from "@/lib/schemas"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,7 +11,7 @@ import { toast } from "sonner"
 import { fetchSettings, saveSettings, fetchAuditLogs, createBackup, restoreBackup } from "@/app/actions/admin-settings"
 import { Loader2, AlertCircle, Download, RotateCcw, History } from "lucide-react"
 
-type Settings = Record<string, unknown>
+type Settings = SettingsType | Record<string, any>
 type AuditLog = {
   _id: string
   timestamp: string

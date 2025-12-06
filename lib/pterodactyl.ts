@@ -99,7 +99,7 @@ export class Pterodactyl {
 
 async addServer(
   userId: number,
-  serverName: username,
+  serverName: string,
   memory: number,
   disk: number,
   cpu: number

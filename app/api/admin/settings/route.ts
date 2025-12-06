@@ -1,5 +1,6 @@
 import { MongoClient, Db, MongoError } from "mongodb"
 import { validateSettings, getValidationErrors } from "@/lib/schemas"
+import { NextResponse } from "next/server"
 
 interface CachedConnection {
   client: MongoClient
@@ -38,11 +39,11 @@ export async function GET() {
     const { db } = await connectToDatabase()
     const settings = await db.collection<any>("settings").findOne({ _id: "app_config" })
 
-    return Response.json(settings || {}, { status: 200 })
+    return NextResponse.json(settings || {}, { status: 200 })
   } catch (error) {
     console.error("Error fetching settings:", error)
     const message = error instanceof Error ? error.message : "Failed to fetch settings"
-    return Response.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -51,14 +52,14 @@ export async function POST(req: Request) {
     const body = await req.json()
 
     if (!body || typeof body !== "object") {
-      return Response.json({ error: "Invalid request body" }, { status: 400 })
+      return NextResponse.json({ error: "Invalid request body" }, { status: 400 })
     }
 
     // Validate settings
     const validation = validateSettings(body)
     if (!validation.success) {
       const errors = getValidationErrors(validation.error)
-      return Response.json(
+      return NextResponse.json(
         { error: "Validation failed", details: errors },
         { status: 422 }
       )
@@ -85,7 +86,7 @@ export async function POST(req: Request) {
       status: "SUCCESS",
     })
 
-    return Response.json({ success: true, result }, { status: 200 })
+    return NextResponse.json({ success: true, result }, { status: 200 })
   } catch (error) {
     console.error("Error saving settings:", error)
 
@@ -103,6 +104,6 @@ export async function POST(req: Request) {
     }
 
     const message = error instanceof Error ? error.message : "Failed to save settings"
-    return Response.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
