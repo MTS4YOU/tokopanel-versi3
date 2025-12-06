@@ -37,7 +37,7 @@ export async function GET() {
     const { db } = await connectToDatabase()
 
     // Fetch current settings
-    const settings = await db.collection("settings").findOne({ _id: "app_config" })
+    const settings = await db.collection<any>("settings").findOne({ _id: "app_config" })
 
     if (!settings) {
       return Response.json({ error: "No settings found to backup" }, { status: 404 })
@@ -50,10 +50,10 @@ export async function GET() {
       createdAt: new Date(),
     }
 
-    await db.collection("backups").insertOne(backup)
+    await db.collection<any>("backups").insertOne(backup)
 
     // Log the action
-    await db.collection("audit_logs").insertOne({
+    await db.collection<any>("audit_logs").insertOne({
       timestamp: new Date(),
       action: "CREATE_BACKUP",
       backupId: backup._id,
@@ -88,21 +88,21 @@ export async function POST(req: Request) {
     const { db } = await connectToDatabase()
 
     // Find backup
-    const backup = await db.collection("backups").findOne({ _id: backupId })
+    const backup = await db.collection<any>("backups").findOne({ _id: backupId })
 
     if (!backup) {
       return Response.json({ error: "Backup tidak ditemukan" }, { status: 404 })
     }
 
     // Restore settings
-    const restoreResult = await db.collection("settings").updateOne(
+    const restoreResult = await db.collection<any>("settings").updateOne(
       { _id: "app_config" },
       { $set: backup.settings },
       { upsert: true }
     )
 
     // Log the action
-    await db.collection("audit_logs").insertOne({
+    await db.collection<any>("audit_logs").insertOne({
       timestamp: new Date(),
       action: "RESTORE_BACKUP",
       backupId,
