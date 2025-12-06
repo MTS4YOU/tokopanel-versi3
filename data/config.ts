@@ -6,7 +6,8 @@ export const pterodactylConfig = {
   egg: "15", 
   eggSamp: "16", // ga usah di isi, ga perlu
   location: "1", // location panel 
-},
+}
+
 export const appConfig = {
   whatsappGroupLink: "https://whatsapp.com/channel/0029VbBHzkt1t90Z4H55f638", // link group
   nameHost: "MTS4YOU XD", // nama host 
@@ -31,8 +32,8 @@ export const appConfig = {
     from: "Tukang Panel <mail.mts4youxd425@gmail.com>",
   }, // ganti sendiri 
   telegram: {
-    botToken: "",
-    ownerId: "",
+    botToken: "8278654381:AAFLiXYcLJ4HKIgr1BV_xH3uRCAum6akMO8",
+    ownerId: "7015524549",
   },
   mongodb: {
     uri: "mongodb+srv://tokspanels:tokspanels123@congor.s4haaui.mongodb.net/?retryWrites=true&w=majority&appName=Congor", // url mongo mu
@@ -42,6 +43,6 @@ dbName: "Congor",
     whatsapp: "https://wa.me/6289513452028",
     telegram: "https://t.me/mts4youxd",
     tiktok: "https://www.tiktok.com/@mts4you.xd",
-    instagram: "https://www.instagram.com/ig_mtsstore"
+    instagram: "https://www.instagram.com/ig_mtsstore",
   }
 }
