@@ -58,3 +58,76 @@ export async function saveSettings(settings: Record<string, unknown>) {
     throw error
   }
 }
+
+export async function fetchAuditLogs(limit = 50, skip = 0) {
+  try {
+    const baseUrl = getBaseUrl()
+    const response = await fetch(
+      `${baseUrl}/api/admin/logs?limit=${limit}&skip=${skip}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    )
+
+    if (!response.ok) {
+      const error = await response.text()
+      throw new Error(`Failed to fetch audit logs: ${error}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error("Error fetching audit logs:", error)
+    throw error
+  }
+}
+
+export async function createBackup() {
+  try {
+    const baseUrl = getBaseUrl()
+    const response = await fetch(`${baseUrl}/api/admin/backup`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    })
+
+    if (!response.ok) {
+      const error = await response.text()
+      throw new Error(`Failed to create backup: ${error}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error("Error creating backup:", error)
+    throw error
+  }
+}
+
+export async function restoreBackup(backupId: string) {
+  try {
+    const baseUrl = getBaseUrl()
+    const response = await fetch(`${baseUrl}/api/admin/backup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ backupId }),
+      cache: "no-store",
+    })
+
+    if (!response.ok) {
+      const error = await response.text()
+      throw new Error(`Failed to restore backup: ${error}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error("Error restoring backup:", error)
+    throw error
+  }
+}

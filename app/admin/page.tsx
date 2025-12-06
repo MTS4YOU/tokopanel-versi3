@@ -7,10 +7,18 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "sonner"
-import { fetchSettings, saveSettings } from "@/app/actions/admin-settings"
-import { Loader2, AlertCircle } from "lucide-react"
+import { fetchSettings, saveSettings, fetchAuditLogs, createBackup, restoreBackup } from "@/app/actions/admin-settings"
+import { Loader2, AlertCircle, Download, RotateCcw, History } from "lucide-react"
 
 type Settings = Record<string, unknown>
+type AuditLog = {
+  _id: string
+  timestamp: string
+  action: string
+  status: string
+  changes?: unknown
+  error?: string
+}
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(true)
@@ -19,6 +27,9 @@ export default function AdminPage() {
   const [originalSettings, setOriginalSettings] = useState<Settings>({})
   const [settings, setSettings] = useState<Settings>({})
   const [error, setError] = useState<string | null>(null)
+  const [auditLogs, setAuditLogs] = useState<AuditLog[]>([])
+  const [logsLoading, setLogsLoading] = useState(false)
+  const [backupCreating, setBackupCreating] = useState(false)
 
   useEffect(() => {
     loadSettings()
@@ -83,6 +94,34 @@ export default function AdminPage() {
     toast.info("Perubahan dibatalkan")
   }, [originalSettings])
 
+  const loadAuditLogs = useCallback(async () => {
+    try {
+      setLogsLoading(true)
+      const data = await fetchAuditLogs(50, 0)
+      setAuditLogs(data.logs || [])
+    } catch (error) {
+      toast.error("Gagal memuat audit logs")
+      console.error(error)
+    } finally {
+      setLogsLoading(false)
+    }
+  }, [])
+
+  const handleCreateBackup = useCallback(async () => {
+    try {
+      setBackupCreating(true)
+      const result = await createBackup()
+      toast.success(result.message)
+      loadAuditLogs()
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Gagal membuat backup"
+      toast.error(errorMessage)
+      console.error(error)
+    } finally {
+      setBackupCreating(false)
+    }
+  }, [loadAuditLogs])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -113,11 +152,13 @@ export default function AdminPage() {
         )}
 
         <Tabs defaultValue="pterodactyl" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="pterodactyl">Pterodactyl</TabsTrigger>
             <TabsTrigger value="app">Aplikasi</TabsTrigger>
             <TabsTrigger value="payment">Pembayaran</TabsTrigger>
             <TabsTrigger value="services">Layanan</TabsTrigger>
+            <TabsTrigger value="logs">Audit Logs</TabsTrigger>
+            <TabsTrigger value="backup">Backup</TabsTrigger>
           </TabsList>
 
           {/* Pterodactyl Settings */}
@@ -458,6 +499,109 @@ export default function AdminPage() {
                       onChange={(e) => handleInputChange("appConfig.mongodb.dbName", e.target.value)}
                     />
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Audit Logs Tab */}
+          <TabsContent value="logs" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <History className="w-5 h-5" />
+                  Audit Logs
+                </CardTitle>
+                <CardDescription>Lihat riwayat perubahan pengaturan</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button
+                  onClick={loadAuditLogs}
+                  disabled={logsLoading}
+                  variant="outline"
+                >
+                  {logsLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Loading...
+                    </>
+                  ) : (
+                    "Muat Logs"
+                  )}
+                </Button>
+
+                {auditLogs.length > 0 ? (
+                  <div className="space-y-2 max-h-96 overflow-y-auto">
+                    {auditLogs.map((log) => (
+                      <div
+                        key={log._id}
+                        className="p-3 bg-gray-50 rounded-lg border border-gray-200"
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="font-semibold text-sm">{log.action}</span>
+                          <span
+                            className={`text-xs px-2 py-1 rounded ${
+                              log.status === "SUCCESS"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-red-100 text-red-800"
+                            }`}
+                          >
+                            {log.status}
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-600">
+                          {new Date(log.timestamp).toLocaleString("id-ID")}
+                        </p>
+                        {log.error && (
+                          <p className="text-xs text-red-600 mt-1">{log.error}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500">Belum ada logs</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Backup Tab */}
+          <TabsContent value="backup" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Download className="w-5 h-5" />
+                  Backup & Restore
+                </CardTitle>
+                <CardDescription>Kelola backup pengaturan</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button
+                  onClick={handleCreateBackup}
+                  disabled={backupCreating}
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  {backupCreating ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Membuat Backup...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4 mr-2" />
+                      Buat Backup Sekarang
+                    </>
+                  )}
+                </Button>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <h3 className="font-semibold text-sm text-blue-900">Informasi Backup</h3>
+                  <ul className="text-xs text-blue-800 space-y-1">
+                    <li>• Backup menyimpan snapshot lengkap dari semua pengaturan</li>
+                    <li>• Setiap backup di-timestamp otomatis</li>
+                    <li>• Anda dapat restore ke backup sebelumnya kapan saja</li>
+                    <li>• Semua operasi backup di-log dalam audit logs</li>
+                  </ul>
                 </div>
               </CardContent>
             </Card>
