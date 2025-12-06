@@ -1,22 +1,35 @@
-import { MongoClient, Db } from "mongodb"
+import { MongoClient, Db, MongoError } from "mongodb"
 
-let cachedClient: MongoClient | null = null
-let cachedDb: Db | null = null
+interface CachedConnection {
+  client: MongoClient
+  db: Db
+}
 
-async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb }
+let cached: CachedConnection | null = null
+
+async function connectToDatabase(): Promise<CachedConnection> {
+  if (cached?.client && cached?.db) {
+    return cached
   }
 
-  const uri = process.env.MONGODB_URI || ""
-  const client = new MongoClient(uri)
-  await client.connect()
+  const uri = process.env.MONGODB_URI
 
-  const db = client.db("admin_settings")
-  cachedClient = client
-  cachedDb = db
+  if (!uri) {
+    throw new Error("MONGODB_URI environment variable is not defined")
+  }
 
-  return { client, db }
+  try {
+    const client = new MongoClient(uri)
+    await client.connect()
+
+    const db = client.db(process.env.MONGODB_DB_NAME || "tokopanel_admin")
+    cached = { client, db }
+
+    return cached
+  } catch (error) {
+    console.error("MongoDB connection error:", error)
+    throw new Error("Failed to connect to MongoDB")
+  }
 }
 
 export async function GET() {
@@ -27,24 +40,31 @@ export async function GET() {
     return Response.json(settings || {}, { status: 200 })
   } catch (error) {
     console.error("Error fetching settings:", error)
-    return Response.json({ error: "Failed to fetch settings" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Failed to fetch settings"
+    return Response.json({ error: message }, { status: 500 })
   }
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
+
+    if (!body || typeof body !== "object") {
+      return Response.json({ error: "Invalid request body" }, { status: 400 })
+    }
+
     const { db } = await connectToDatabase()
 
     const result = await db.collection("settings").updateOne(
       { _id: "app_config" },
-      { $set: body },
+      { $set: { ...body, updatedAt: new Date() } },
       { upsert: true }
     )
 
     return Response.json({ success: true, result }, { status: 200 })
   } catch (error) {
     console.error("Error saving settings:", error)
-    return Response.json({ error: "Failed to save settings" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Failed to save settings"
+    return Response.json({ error: message }, { status: 500 })
   }
 }

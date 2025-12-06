@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,33 +8,41 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "sonner"
 import { fetchSettings, saveSettings } from "@/app/actions/admin-settings"
-import { Loader2 } from "lucide-react"
+import { Loader2, AlertCircle } from "lucide-react"
+
+type Settings = Record<string, unknown>
 
 export default function AdminPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [settings, setSettings] = useState<any>({})
+  const [hasChanges, setHasChanges] = useState(false)
+  const [originalSettings, setOriginalSettings] = useState<Settings>({})
+  const [settings, setSettings] = useState<Settings>({})
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     loadSettings()
   }, [])
 
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       setLoading(true)
+      setError(null)
       const data = await fetchSettings()
-      if (data) {
-        setSettings(data)
-      }
+      setSettings(data || {})
+      setOriginalSettings(JSON.parse(JSON.stringify(data || {})))
+      setHasChanges(false)
     } catch (error) {
-      toast.error("Gagal memuat pengaturan")
+      const errorMessage = error instanceof Error ? error.message : "Gagal memuat pengaturan"
+      setError(errorMessage)
+      toast.error(errorMessage)
       console.error(error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const handleInputChange = (path: string, value: any) => {
+  const handleInputChange = useCallback((path: string, value: unknown) => {
     const keys = path.split(".")
     const newSettings = JSON.parse(JSON.stringify(settings))
     let current = newSettings
@@ -48,20 +56,32 @@ export default function AdminPage() {
 
     current[keys[keys.length - 1]] = value
     setSettings(newSettings)
-  }
+    setHasChanges(true)
+  }, [settings])
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     try {
       setSaving(true)
+      setError(null)
       await saveSettings(settings)
+      setOriginalSettings(JSON.parse(JSON.stringify(settings)))
+      setHasChanges(false)
       toast.success("Pengaturan berhasil disimpan")
     } catch (error) {
-      toast.error("Gagal menyimpan pengaturan")
+      const errorMessage = error instanceof Error ? error.message : "Gagal menyimpan pengaturan"
+      setError(errorMessage)
+      toast.error(errorMessage)
       console.error(error)
     } finally {
       setSaving(false)
     }
-  }
+  }, [settings])
+
+  const handleReset = useCallback(() => {
+    setSettings(JSON.parse(JSON.stringify(originalSettings)))
+    setHasChanges(false)
+    toast.info("Perubahan dibatalkan")
+  }, [originalSettings])
 
   if (loading) {
     return (
@@ -78,6 +98,19 @@ export default function AdminPage() {
           <h1 className="text-3xl font-bold text-gray-900">Admin Panel</h1>
           <p className="text-gray-600">Kelola semua pengaturan aplikasi</p>
         </div>
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
+            <AlertCircle className="w-5 h-5 text-red-600" />
+            <p className="text-sm text-red-600">{error}</p>
+          </div>
+        )}
+
+        {hasChanges && (
+          <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p className="text-sm text-yellow-800">Anda memiliki perubahan yang belum disimpan</p>
+          </div>
+        )}
 
         <Tabs defaultValue="pterodactyl" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
@@ -434,7 +467,7 @@ export default function AdminPage() {
         <div className="flex gap-4 mt-8">
           <Button
             onClick={handleSave}
-            disabled={saving}
+            disabled={saving || !hasChanges}
             className="bg-blue-600 hover:bg-blue-700"
           >
             {saving ? (
@@ -447,8 +480,9 @@ export default function AdminPage() {
             )}
           </Button>
           <Button
-            onClick={loadSettings}
+            onClick={handleReset}
             variant="outline"
+            disabled={!hasChanges || saving}
           >
             Reset
           </Button>
