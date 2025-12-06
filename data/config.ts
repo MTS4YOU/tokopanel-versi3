@@ -1,6 +1,6 @@
 export const pterodactylConfig = {
   domain: "https://destokopanel157-private20.panelshop.biz.id", 
-  apiKey: process.env.ptla_panel,
+  apiKey: "ptla_p8T4lADwBV7iKgoHCOGSRGvB1wHeFjDDgP52ZYZ86ZI",
   nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
   egg: "15", 
