@@ -32,7 +32,9 @@ export default function AdminPage() {
   const [logsLoading, setLogsLoading] = useState(false)
   const [backupCreating, setBackupCreating] = useState(false)
 
-
+  useEffect(() => {
+    loadSettings()
+  }, [])
 
   const loadSettings = useCallback(async () => {
     try {
@@ -51,10 +53,6 @@ export default function AdminPage() {
       setLoading(false)
     }
   }, [])
-
-  useEffect(() => {
-    loadSettings()
-  }, [loadSettings])
 
   const handleInputChange = useCallback((path: string, value: unknown) => {
     const keys = path.split(".")

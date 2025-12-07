@@ -49,7 +49,7 @@ export function ConfirmationDialog({ open, onOpenChange, planId, onConfirm, isLo
             </div>
           </div>
           <p className="text-sm text-gray-400">
-            Dengan mengklik tombol Lanjutkan Pembayaran, Anda akan diarahkan ke halaman pembayaran.
+            Dengan mengklik tombol "Lanjutkan Pembayaran", Anda akan diarahkan ke halaman pembayaran.
           </p>
         </div>
         <DialogFooter className="flex flex-col sm:flex-row sm:justify-between gap-2">
