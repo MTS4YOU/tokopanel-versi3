@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -60,46 +60,49 @@ export function QrPayment({
     return plan ? plan.name : "Unknown"
   }
 
-  const saveTransactionToHistory = (status: "pending" | "paid" | "completed" | "failed", details?: any) => {
-    try {
-      const existingHistory = localStorage.getItem("transactionHistory")
-      let history = existingHistory ? JSON.parse(existingHistory) : []
+  const saveTransactionToHistory = useCallback(
+    (status: "pending" | "paid" | "completed" | "failed", details?: any) => {
+      try {
+        const existingHistory = localStorage.getItem("transactionHistory")
+        let history = existingHistory ? JSON.parse(existingHistory) : []
 
-      const existingIndex = history.findIndex((t: any) => t.transactionId === transactionId)
+        const existingIndex = history.findIndex((t: any) => t.transactionId === transactionId)
 
-      const planName = getPlanName(planId)
+        const planName = getPlanName(planId)
 
-      const transaction = {
-        transactionId,
-        username,
-        email,
-        planId,
-        planName,
-        total,
-        createdAt,
-        status,
-        panelDetails: details || undefined,
+        const transaction = {
+          transactionId,
+          username,
+          email,
+          planId,
+          planName,
+          total,
+          createdAt,
+          status,
+          panelDetails: details || undefined,
+        }
+
+        if (existingIndex !== -1) {
+          history[existingIndex] = transaction
+        } else {
+          history.unshift(transaction)
+        }
+
+        if (history.length > 20) {
+          history = history.slice(0, 20)
+        }
+
+        localStorage.setItem("transactionHistory", JSON.stringify(history))
+      } catch (error) {
+        console.error("Error saving transaction to history:", error)
       }
-
-      if (existingIndex !== -1) {
-        history[existingIndex] = transaction
-      } else {
-        history.unshift(transaction)
-      }
-
-      if (history.length > 20) {
-        history = history.slice(0, 20)
-      }
-
-      localStorage.setItem("transactionHistory", JSON.stringify(history))
-    } catch (error) {
-      console.error("Error saving transaction to history:", error)
-    }
-  }
+    },
+    [transactionId, username, email, planId, total, createdAt]
+  )
 
   useEffect(() => {
     saveTransactionToHistory(initialStatus)
-  }, [])
+  }, [initialStatus, saveTransactionToHistory])
 
   const checkStatus = async () => {
     if (status === "completed") {
@@ -189,7 +192,7 @@ export function QrPayment({
       }, 10000)
       return () => clearInterval(interval)
     }
-  }, [status, transactionId])
+  }, [status, transactionId, saveTransactionToHistory])
 
   const expiration = new Date(expirationTime)
   const isExpired = new Date() > expiration
@@ -259,7 +262,7 @@ export function QrPayment({
                       <li>Scan QR Code di samping</li>
                       <li>Masukkan nominal sesuai total pembayaran</li>
                       <li>Selesaikan pembayaran</li>
-                      <li>Klik tombol "Cek Status Pembayaran" di bawah</li>
+                      <li>Klik tombol Cek Status Pembayaran di bawah</li>
                     </ol>
                   </div>
 
