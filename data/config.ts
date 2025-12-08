@@ -18,8 +18,8 @@ export const appConfig = {
     replaceLimit: 3, // Limit replace/claim
   },
   pay: {
-    api_key: "KEY-Dq4VmT7PQorsWotGvyczJnsBfcx",
-    api_id: "ID-723482138356",
+    api_key: process.env.SAKURUPIAH_APIKEY,
+    api_id: process.env.SAKURUPIAH_ID,
   },
   emailSender: {
     host: "mail.mts4youxd425@gmail.com", // Gmail host
@@ -32,8 +32,8 @@ export const appConfig = {
     from: "Tukang Panel <mail.mts4youxd425@gmail.com>",
   }, // ganti sendiri 
   telegram: {
-    botToken: "8278654381:AAFLiXYcLJ4HKIgr1BV_xH3uRCAum6akMO8",
-    ownerId: "7015524549",
+    botToken: "",
+    ownerId: "",
   },
   mongodb: {
     uri: process.env.MONGODB_URL, // url mongo mu
