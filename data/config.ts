@@ -26,8 +26,8 @@ export const appConfig = {
     port: 587, // ga usa di ubah, ga guna 
     secure: false, // false in
     auth: {
-      user: "mail.mts4youxd425@gmail.com", // Gmail buat ngirim ke Gmail buyer 
-      pass: "joernukccwnrzpww", // sandi aplikasi 
+      user: process.env.GMAIL_ADRESS, // Gmail buat ngirim ke Gmail buyer 
+      pass: process.env.GMAIL_PASSWORD, // sandi aplikasi 
     },
     from: "Tukang Panel <mail.mts4youxd425@gmail.com>",
   }, // ganti sendiri 
