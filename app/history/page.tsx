@@ -171,7 +171,7 @@ export default function HistoryPage() {
   }
 
   // Helper function to safely format dates
-  const safeFormatDate = (dateString: any) => {
+  const safeFormatDate = (dateString: string ) => {
     try {
       // Handle ISO format and other date formats
       let date: Date
