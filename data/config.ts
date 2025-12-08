@@ -1,6 +1,6 @@
 export const pterodactylConfig = {
   domain: "https://tokopanel157-private216.mts4you.biz.id", 
-  apiKey: "ptla_qm7xrKiddLFiHGRreFvj7InTkczyGhJ9p3PP3ALX0bd",
+  apiKey: process.env.PANEL_APIKEY,
   nests: "5", 
   nestsGame: "2", // ga usah di isi, ga perlu
   egg: "15", 
@@ -36,7 +36,7 @@ export const appConfig = {
     ownerId: "7015524549",
   },
   mongodb: {
-    uri: "mongodb+srv://tokspanels:tokspanels123@congor.s4haaui.mongodb.net/?retryWrites=true&w=majority&appName=Congor", // url mongo mu
+    uri: process.env.MONGODB_URL, // url mongo mu
 dbName: "Congor",
   },
   socialMedia: {
