@@ -14,8 +14,6 @@ type PanelData = {
   cpu: number
   planId: string
   createdAt: string
-  panelType?: string
-  transactionId?: string
 }
 
 export async function createPanel(data: PanelData) {
