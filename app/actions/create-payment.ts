@@ -26,12 +26,6 @@ export interface PaymentData {
   expirationTime: string
   status: "pending" | "paid" | "completed" | "failed"
   createdAt: string
-  panelDetails?: {
-    username: string
-    password: string
-    serverId: number
-  }
-  panelType?: string
 }
 
 export async function createPayment(planId: string, username: string, email: string) {
