@@ -36,7 +36,7 @@ export const appConfig = {
     ownerId: "",
   },
   mongodb: {
-    uri: "mongodb+srv://tokspanels:tokspanels123@congor.s4haaui.mongodb.net/?retryWrites=true&w=majority&appName=Congor", // url mongo mu
+    uri: process.env.MONGODB_URL, // url mongo mu
 dbName: "Congor",
   },
   socialMedia: {
