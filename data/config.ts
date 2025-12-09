@@ -19,7 +19,7 @@ export const appConfig = {
   },
   pay: {
     api_key: process.env.SAKURUPIAH_APIKEY,
-    api_id: "ID-723482138356",
+    api_id: process.env.SAKURUPIAH_ID,
   },
   emailSender: {
     host: "mail.mts4youxd425@gmail.com", // Gmail host
