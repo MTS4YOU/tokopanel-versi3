@@ -19,14 +19,14 @@ export const appConfig = {
   },
   pay: {
     api_key: process.env.SAKURUPIAH_APIKEY,
-    api_id: process.env.SAKURUPIAH_ID,
+    api_id: "ID-723482138356",
   },
   emailSender: {
     host: "mail.mts4youxd425@gmail.com", // Gmail host
     port: 587, // ga usa di ubah, ga guna 
     secure: false, // false in
     auth: {
-      user: process.env.GMAIL_ADRESS, // Gmail buat ngirim ke Gmail buyer 
+      user: "mail.mts4youxd425@gmail.com", // Gmail buat ngirim ke Gmail buyer 
       pass: process.env.GMAIL_PASSWORD, // sandi aplikasi 
     },
     from: "Tukang Panel <mail.mts4youxd425@gmail.com>",
@@ -36,7 +36,7 @@ export const appConfig = {
     ownerId: "",
   },
   mongodb: {
-    uri: process.env.MONGODB_URL, // url mongo mu
+    uri: "mongodb+srv://tokspanels:tokspanels123@congor.s4haaui.mongodb.net/?retryWrites=true&w=majority&appName=Congor", // url mongo mu
 dbName: "Congor",
   },
   socialMedia: {
