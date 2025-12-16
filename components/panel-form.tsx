@@ -134,7 +134,7 @@ export default function PanelForm() {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Masukkan username"
+              placeholder="Masukkan username tanpa spasi"
               required
               className="h-14 text-base pl-10 bg-dark-500 border-dark-300 focus:border-red-500 focus:ring-red-500"
             />
@@ -155,7 +155,7 @@ export default function PanelForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Masukkan email"
+              placeholder="Masukkan email penerima"
               required
               className="h-14 text-base pl-10 bg-dark-500 border-dark-300 focus:border-red-500 focus:ring-red-500"
             />
