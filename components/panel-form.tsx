@@ -155,7 +155,7 @@ export default function PanelForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Masukan Email Penerima"
+              placeholder="Masukan Alamat Email!!"
               required
               className="h-14 text-base pl-10 bg-dark-500 border-dark-300 focus:border-red-500 focus:ring-red-500"
             />
