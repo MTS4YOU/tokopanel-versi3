@@ -22,7 +22,7 @@ export function InfoSection() {
     {
       icon: <CalendarClock className="w-10 h-10 text-red-500" />,
       title: "MASA AKTIF PANEL",
-      description: "Masa aktif panel hanya 1 bulan, dengan garansi aktif 12 hari (3× replace).",
+      description: "Masa aktif panel hanya 1 bulan, dengan garansi aktif 30 hari (3× replace).",
       delay: 0.4,
     },
     {
