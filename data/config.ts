@@ -14,7 +14,7 @@ export const appConfig = {
   feeMin: 135, //minimal fee
   feeMax: 136, // max fee 
   garansi: {
-    warrantyDays: 12, // Limit hari
+    warrantyDays: 30, // Limit hari
     replaceLimit: 3, // Limit replace/claim
   },
   pay: {
