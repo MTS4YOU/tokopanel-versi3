@@ -32,7 +32,7 @@ export const plans = [
     memory: 0,
     disk: 0,
     cpu: 0,
-    price: 15000,
+    price: 17000,
     description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗕𝗲𝗿𝗮𝘁",
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
@@ -153,13 +153,13 @@ export const plans = [
     description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗦𝘁𝗮𝗻𝗱𝗮𝗿",
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },  {
-    id: "unlimited",
-    name: "PANEL BOT UNLIMITED",
-    memory: 0,
-    disk: 0,
-    cpu: 0,
+    id: "7,5gb",
+    name: "PANEL BOT 7,5GB",
+    memory: 7525,
+    disk: 7525,
+    cpu: 300,
     price: 15000,
-    description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗕𝗲𝗿𝗮𝘁",
+    description: "𝗣𝗮𝗸𝗲𝘁 𝗛𝗲𝗺𝗮𝘁 𝗨𝗻𝘁𝘂𝗸 𝗦𝗰𝗿𝗶𝗽𝘁 𝗕𝗼𝘁 𝗦𝘁𝗮𝗻𝗱𝗮𝗿",
     features: ["𝗣𝗿𝗶𝘃𝗮𝘁𝗲 𝗦𝗲𝗿𝘃𝗲𝗿", "Support Nodejs 20+", "Masa Aktif ±1 Bulan", "Garansi 10 Hari", "𝗧𝗲𝗿𝗹𝗶𝗻𝗱𝘂𝗻𝗴𝗶 𝗗𝗮𝗿𝗶 𝗠𝗮𝗹𝗶𝗻𝗴 𝗦𝗰𝗿𝗶𝗽𝘁"],
   },
   ]
