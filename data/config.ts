@@ -15,7 +15,7 @@ export const appConfig = {
   feeMax: 136, // max fee 
   garansi: {
     warrantyDays: 30, // Limit hari
-    replaceLimit: 3, // Limit replace/claim
+    replaceLimit: 5, // Limit replace/claim
   },
   pay: {
     api_key: process.env.SAKURUPIAH_APIKEY,
