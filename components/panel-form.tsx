@@ -34,6 +34,15 @@ export default function PanelForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    if (username.length < 3 || /[^a-zA-Z0-9]/.test(username)) {
+  toast({
+    title: "Error",
+    description: "Username harus minimal 3 karakter dan hanya boleh huruf & angka",
+    variant: "destructive"
+  })
+  return
+    }
+    
     if (!username || !email || !selectedPlan) {
       toast({
         title: "Error",
